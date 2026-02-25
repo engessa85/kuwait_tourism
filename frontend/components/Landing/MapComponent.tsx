@@ -49,31 +49,33 @@ const MapComponent = () => {
         </div>
     );
 
-    // Center of Kuwait City
-    const center: [number, number] = [29.3759, 47.9774];
+    // Balanced center between Kuwait Towers and The Avenues
+    const center: [number, number] = [29.346, 47.969];
 
     return (
         <div className="h-full w-full">
             <MapContainer
                 center={center}
-                zoom={13}
+                zoom={12}
                 scrollWheelZoom={false}
+                attributionControl={false}
                 className="h-full w-full z-0"
             >
                 <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                // Applying a grayscale/light filter via CSS in globals.css for "Google Maps" aesthetic
                 />
 
                 {/* Kuwait Towers */}
                 <CustomMarker position={[29.3892, 48.0031]} name="Kuwait Towers" color="#2563eb" />
 
                 {/* The Avenues */}
-                <CustomMarker position={[29.3039, 47.9356]} name="The Avenues" color="#f59e0b" />
+                <CustomMarker position={[29.3039, 47.9356]} name="The Avenues" color="#2563eb" />
+
+                {/* Souq Mubarakiya */}
+                <CustomMarker position={[29.3719, 47.9721]} name="Mubarakiya" color="#2563eb" />
 
                 {/* Al Shaheed Park */}
-                <CustomMarker position={[29.3662, 47.9897]} name="Al Shaheed Park" color="#10b981" />
+                <CustomMarker position={[29.3662, 47.9897]} name="Shaheed Park" color="#2563eb" />
             </MapContainer>
         </div>
     );
