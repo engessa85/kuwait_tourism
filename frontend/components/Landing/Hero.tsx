@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Hero = () => {
     return (
-        <section className="relative h-[80vh] w-full overflow-hidden">
+        <section id="home" className="relative h-[80vh] w-full overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image

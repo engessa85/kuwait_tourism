@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const MapSection = () => {
     return (
-        <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <section id="map" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
             <div className="bg-white rounded-4xl overflow-hidden shadow-2xl shadow-blue-900/5 grid grid-cols-1 lg:grid-cols-2 items-center border border-gray-100">
                 {/* Left Content */}
                 <div className="p-10 md:p-16">

@@ -12,7 +12,7 @@ const categories = [
 
 const Categories = () => {
     return (
-        <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <section id="categories" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
             <div className="flex justify-between items-end mb-10">
                 <div>
                     <h2 className="text-3xl font-bold text-gray-900 mb-2">Explore by Category</h2>

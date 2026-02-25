@@ -7,9 +7,13 @@ function Header() {
             <div className='max-w-7xl mx-auto flex justify-between items-center px-4 py-4 md:px-8'>
                 {/* Logo Section */}
                 <div className='flex items-center gap-3'>
-                    <div className='w-8 h-8 bg-primary rounded-sm flex items-center justify-center'>
-                        <div className='w-4 h-4 bg-white transform rotate-45 opacity-20'></div>
-                    </div>
+                    <Image
+                        src="/logo.png"
+                        alt="Kuwait Tourism"
+                        width={32}
+                        height={32}
+                        className="h-8 w-auto object-contain"
+                    />
                     <span className='text-lg font-bold text-gray-900'>
                         Kuwait Tourism
                     </span>
@@ -18,8 +22,10 @@ function Header() {
                 {/* Navigation Links */}
                 <nav className='hidden md:block'>
                     <ul className='flex gap-8 text-[14px] font-medium text-gray-600'>
-                        <li className='hover:text-primary cursor-pointer transition-colors duration-200'>Explore</li>
-                        <li className='hover:text-primary cursor-pointer transition-colors duration-200'>Events</li>
+                        <li><a href="#home" className='hover:text-primary cursor-pointer transition-colors duration-200'>Home</a></li>
+                        <li><a href="#categories" className='hover:text-primary cursor-pointer transition-colors duration-200'>Categories</a></li>
+                        <li><a href="#experiences" className='hover:text-primary cursor-pointer transition-colors duration-200'>Experiences</a></li>
+                        <li><a href="#map" className='hover:text-primary cursor-pointer transition-colors duration-200'>Map</a></li>
                     </ul>
                 </nav>
 
