@@ -32,3 +32,21 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Map Styling for "Google Maps" minimalist look */
+.leaflet-container {
+  background: #A3D8F4 !important;
+}
+
+.leaflet-tile-pane {
+  filter: grayscale(20%) brightness(105%) contrast(95%);
+}
+
+.custom-div-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-div-icon:hover {
+  z-index: 1000 !important;
+}

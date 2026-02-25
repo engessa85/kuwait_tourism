@@ -1,10 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
 
+import dynamic from 'next/dynamic';
+
+const MapComponent = dynamic(() => import('./MapComponent'), {
+    ssr: false,
+    loading: () => (
+        <div className="w-full h-full bg-blue-50 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+    )
+});
+
 const MapSection = () => {
     return (
         <section id="map" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <div className="bg-white rounded-4xl overflow-hidden shadow-2xl shadow-blue-900/5 grid grid-cols-1 lg:grid-cols-2 border border-gray-100 min-h-[500px]">
+            <div className="bg-white rounded-4xl overflow-hidden shadow-2xl shadow-blue-900/5 grid grid-cols-1 lg:grid-cols-2 border border-gray-100 min-h-[600px]">
                 {/* Left Content */}
                 <div className="p-10 md:p-16 flex flex-col justify-center">
                     <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-8">
@@ -26,40 +37,9 @@ const MapSection = () => {
                     </button>
                 </div>
 
-                {/* Right Map Image */}
-                <div className="relative h-full w-full bg-[#A3D8F4]">
-                    <Image
-                        src="/kuwait_map.png"
-                        alt="Kuwait Landmarks Map"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-
-                    {/* Map Labels/Pins to match the design */}
-                    {/* Kuwait Towers */}
-                    <div className="absolute top-[35%] left-[50%] -translate-x-1/2 -translate-y-1/2">
-                        <div className="bg-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 border border-gray-100">
-                            <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-                            <span className="text-[11px] font-bold text-gray-900 whitespace-nowrap">Kuwait Towers</span>
-                        </div>
-                    </div>
-
-                    {/* The Avenues */}
-                    <div className="absolute top-[52%] left-[72%] -translate-x-1/2 -translate-y-1/2">
-                        <div className="bg-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 border border-gray-100">
-                            <div className="w-2 h-2 rounded-full bg-amber-500"></div>
-                            <span className="text-[11px] font-bold text-gray-900 whitespace-nowrap">The Avenues</span>
-                        </div>
-                    </div>
-
-                    {/* Al Shaheed Park */}
-                    <div className="absolute top-[59%] left-[60%] -translate-x-1/2 -translate-y-1/2">
-                        <div className="bg-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2 border border-gray-100">
-                            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                            <span className="text-[11px] font-bold text-gray-900 whitespace-nowrap">Al Shaheed Park</span>
-                        </div>
-                    </div>
+                {/* Right Interactive Map */}
+                <div className="relative h-[500px] lg:h-full w-full z-0">
+                    <MapComponent />
                 </div>
             </div>
         </section>
