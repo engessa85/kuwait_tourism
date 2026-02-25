@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Footer = () => {
+    const { t } = useLanguage();
+
     return (
         <footer className="bg-white border-t border-gray-100 pt-20 pb-10">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -20,8 +25,8 @@ const Footer = () => {
                                 Kuwait Tourism
                             </span>
                         </div>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs">
-                            The official guide to exploring the hidden gems of the Gulf. Experience tradition, luxury, and adventure.
+                        <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs text-left rtl:text-right">
+                            {t.footer.description}
                         </p>
                         {/* Social Icons */}
                         <div className="flex gap-4">
@@ -32,7 +37,7 @@ const Footer = () => {
                                 </svg>
                             </a>
                             {/* Twitter / X */}
-                            <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white text-gray-500 transition-all duration-300">
+                            <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white text-gray-500 transition-all duration-300 text-left rtl:text-right">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                 </svg>
@@ -47,26 +52,26 @@ const Footer = () => {
                     </div>
 
                     {/* Explore Column (matches Categories section) */}
-                    <div>
-                        <h4 className="font-bold text-gray-900 mb-6">Explore</h4>
+                    <div className="text-left rtl:text-right">
+                        <h4 className="font-bold text-gray-900 mb-6">{t.footer.explore}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Historical</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Modern</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Nature</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Shopping</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Dining</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">Arts</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.historical}</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.modern}</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.nature}</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.shopping}</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.dining}</a></li>
+                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.arts}</a></li>
                         </ul>
                     </div>
 
                     {/* Featured Experiences Column (matches Experiences section) */}
-                    <div>
-                        <h4 className="font-bold text-gray-900 mb-6">Featured Experiences</h4>
+                    <div className="text-left rtl:text-right">
+                        <h4 className="font-bold text-gray-900 mb-6">{t.footer.featured}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">Grand Mosque Guided Tour</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">Failaka Island Heritage</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">Mirror House Art Gallery</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">Al-Salmi Desert Stars</a></li>
+                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.grand_mosque.title}</a></li>
+                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.failaka.title}</a></li>
+                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.mirror_house.title}</a></li>
+                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.salmi_desert.title}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,8 +82,8 @@ const Footer = () => {
                         © {new Date().getFullYear()} Kuwait Tourism. All rights reserved.
                     </p>
                     <div className="flex gap-8 text-xs text-gray-400 uppercase tracking-widest font-bold">
-                        <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+                        <a href="#" className="hover:text-primary transition-colors">{t.footer.privacy}</a>
+                        <a href="#" className="hover:text-primary transition-colors">{t.footer.terms}</a>
                     </div>
                 </div>
             </div>

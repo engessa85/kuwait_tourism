@@ -1,0 +1,73 @@
+{
+    "nav": {
+        "home": "Home",
+        "categories": "Categories",
+        "experiences": "Experiences",
+        "map": "Map"
+    },
+    "hero": {
+        "subtitle": "Discover the Gulf",
+        "title": "Kuwait: Where Tradition Meets Tomorrow",
+        "description": "Experience the perfect blend of modern luxury and deep cultural heritage in the heart of the Arabian Peninsula.",
+        "cta": "Start Your Journey"
+    },
+    "categories": {
+        "title": "Explore by Category",
+        "description": "Find your perfect experience in Kuwait",
+        "items": {
+            "historical": "Historical",
+            "modern": "Modern",
+            "nature": "Nature",
+            "shopping": "Shopping",
+            "dining": "Dining",
+            "arts": "Arts"
+        }
+    },
+    "experiences": {
+        "curated_badge": "Curated For You",
+        "title": "Featured Experiences",
+        "description": "Immerse yourself in the unique activities that make Kuwait unforgettable, from the desert to the sea.",
+        "more": "More",
+        "items": {
+            "grand_mosque": {
+                "title": "Grand Mosque Guided Tour",
+                "category": "Heritage",
+                "description": "Guided tour through the largest mosque in Kuwait, showcasing Islamic architecture and grandeur."
+            },
+            "failaka": {
+                "title": "Failaka Island Heritage",
+                "category": "History",
+                "description": "Explore the historical ruins and ancient Greek temples on this significant Kuwaiti island."
+            },
+            "mirror_house": {
+                "title": "Mirror House Art Gallery",
+                "category": "Culture",
+                "description": "Visit the world-renowned private museum entirely covered in intricate mirrored mosaics."
+            },
+            "salmi_desert": {
+                "title": "Al-Salmi Desert Stars",
+                "category": "Nature",
+                "description": "Experience a magical night of stargazing under the clear skies of the Kuwaiti desert."
+            }
+        }
+    },
+    "map": {
+        "badge": "Map",
+        "title": "Navigate the City's Landmarks",
+        "description": "Plan your itinerary with our interactive map. Discover hidden gems, find the best routes, and explore districts like a local.",
+        "cta": "Open Interactive Map",
+        "markers": {
+            "kuwait_towers": "Kuwait Towers",
+            "avenues": "The Avenues",
+            "mubarakiya": "Mubarakiya",
+            "shaheed_park": "Shaheed Park"
+        }
+    },
+    "footer": {
+        "description": "The official guide to exploring the hidden gems of the Gulf. Experience tradition, luxury, and adventure.",
+        "explore": "Explore",
+        "featured": "Featured Experiences",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+    }
+}

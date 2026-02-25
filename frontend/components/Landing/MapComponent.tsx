@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Fix for default marker icons in Leaflet with Next.js
 const DefaultIcon = L.icon({
@@ -37,6 +38,7 @@ const CustomMarker = ({ position, name, color }: { position: [number, number], n
 };
 
 const MapComponent = () => {
+    const { t } = useLanguage();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -66,16 +68,16 @@ const MapComponent = () => {
                 />
 
                 {/* Kuwait Towers */}
-                <CustomMarker position={[29.3892, 48.0031]} name="Kuwait Towers" color="#2563eb" />
+                <CustomMarker position={[29.3892, 48.0031]} name={t.map.markers.kuwait_towers} color="#2563eb" />
 
                 {/* The Avenues */}
-                <CustomMarker position={[29.3039, 47.9356]} name="The Avenues" color="#2563eb" />
+                <CustomMarker position={[29.3039, 47.9356]} name={t.map.markers.avenues} color="#2563eb" />
 
                 {/* Souq Mubarakiya */}
-                <CustomMarker position={[29.3719, 47.9721]} name="Mubarakiya" color="#2563eb" />
+                <CustomMarker position={[29.3719, 47.9721]} name={t.map.markers.mubarakiya} color="#2563eb" />
 
                 {/* Al Shaheed Park */}
-                <CustomMarker position={[29.3662, 47.9897]} name="Shaheed Park" color="#2563eb" />
+                <CustomMarker position={[29.3662, 47.9897]} name={t.map.markers.shaheed_park} color="#2563eb" />
             </MapContainer>
         </div>
     );
