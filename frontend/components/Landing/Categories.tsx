@@ -5,9 +5,9 @@ const categories = [
     { name: 'Historical', image: '/kuwait_historical_cat.png', icon: '🏛️' },
     { name: 'Modern', image: '/kuwait_modern_cat.png', icon: '🏙️' },
     { name: 'Nature', image: '/kuwait_nature_cat.png', icon: '🏜️' },
-    { name: 'Shopping', image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=400', icon: '🛍️' },
-    { name: 'Dining', image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&q=80&w=400', icon: '🍽️' },
-    { name: 'Arts', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=400', icon: '🎨' },
+    { name: 'Shopping', image: '/kuwait_shoping.webp', icon: '🛍️' },
+    { name: 'Dining', image: '/kuwait_dinning.webp', icon: '🍽️' },
+    { name: 'Arts', image: '/kuwait_arts.jpg', icon: '🎨' },
 ];
 
 const Categories = () => {

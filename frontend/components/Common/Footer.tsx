@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Footer = () => {
     return (
@@ -8,9 +9,14 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div className="lg:col-span-1">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className='w-8 h-8 bg-primary rounded-sm flex items-center justify-center'>
-                                <div className='w-4 h-4 bg-white transform rotate-45 opacity-20'></div>
-                            </div>
+                            <Image
+                                src="/logo.png"
+                                alt="Kuwait Tourism"
+                                width={32}
+                                height={32}
+                                className="h-8 w-auto object-contain"
+                            />
+
                             <span className='text-lg font-bold text-gray-900 uppercase tracking-tight'>
                                 Kuwait Tourism
                             </span>

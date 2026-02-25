@@ -3,32 +3,32 @@ import Image from 'next/image';
 
 const experiences = [
     {
-        title: 'Grand Mosque Tour',
-        category: 'Culture',
+        title: 'Grand Mosque Guided Tour',
+        category: 'Heritage',
         price: '15 KWD',
-        image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=400',
-        description: 'Explore the architectural marvel and spiritual heart of Kuwait City.'
+        image: '/kuwait_grand_mosque.jpg',
+        description: 'Guided tour through the largest mosque in Kuwait, showcasing Islamic architecture and grandeur.'
     },
     {
-        title: 'Failaka Island Ferry',
-        category: 'Adventure',
+        title: 'Failaka Island Heritage',
+        category: 'History',
         price: '22 KWD',
-        image: 'https://images.unsplash.com/photo-1544735745-b40b85292451?auto=format&fit=crop&q=80&w=400',
-        description: 'Journey through history on an island filled with archaeological wonders.'
+        image: '/kuwait_Failaka_Island.jpg',
+        description: 'Explore the historical ruins and ancient Greek temples on this significant Kuwaiti island.'
     },
     {
-        title: 'Mirror House Visit',
-        category: 'Art',
+        title: 'Mirror House Art Gallery',
+        category: 'Culture',
         price: '10 KWD',
-        image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=400',
-        description: 'Step into a glittering world of mosaic art entirely covering a private residence.'
+        image: '/kuwait_mirror_house.jpg',
+        description: 'Visit the world-renowned private museum entirely covered in intricate mirrored mosaics.'
     },
     {
-        title: 'Desert Stargazing',
+        title: 'Al-Salmi Desert Stars',
         category: 'Nature',
         price: '40 KWD',
-        image: 'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?auto=format&fit=crop&q=80&w=400',
-        description: 'Experience the serenity of the Kuwaiti desert under a canopy of stars.'
+        image: '/kuwait_salmi_desert.jpg',
+        description: 'Experience a magical night of stargazing under the clear skies of the Kuwaiti desert.'
     }
 ];
 
