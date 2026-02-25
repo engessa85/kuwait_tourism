@@ -18,7 +18,7 @@ const Categories = () => {
 
     return (
         <section id="categories" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <div className="mb-10 text-center md:text-left">
+            <div className="mb-10 text-center md:text-left rtl:text-right rtl:md:text-right">
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">{t.categories.title}</h2>
                 <p className="text-gray-500">{t.categories.description}</p>
             </div>
