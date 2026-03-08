@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Header from '@/components/Common/Header';
+import CategoriesHeader from '@/components/AllCategories/CategoriesHeader';
 import Footer from '@/components/Common/Footer';
 import HeaderSection from '@/components/AllCategories/HeaderSection';
 import CategoryFilters from '@/components/AllCategories/CategoryFilters';
@@ -14,7 +14,7 @@ const AllCategoriesPage = () => {
     return (
         <LanguageProvider>
             <div className="min-h-screen bg-white">
-                <Header />
+                <CategoriesHeader />
                 <main>
                     <HeaderSection />
                     <CategoryFilters
