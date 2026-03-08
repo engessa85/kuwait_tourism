@@ -109,6 +109,14 @@
                 "rating": 4.6,
                 "reviews": "1,890 reviews",
                 "description": "Home to one of the largest aquariums in the Middle East, an IMAX theater, and interactive exhibits."
+            },
+            "al_boom": {
+                "title": "Al Boom Steak and Seafood Restaurant",
+                "category": "Dining",
+                "location": "Salmiya",
+                "rating": 4.9,
+                "reviews": "1,500 reviews",
+                "description": "Savor the charcoal-grilled seafood, steak and other specialties of Al Boom. Diners will want to experience this unique dining venue aboard a traditional Arabic dhow. Beautiful teak with gold-leaf accents gives this landlocked vessel the atmosphere of luxury sailing."
             }
         }
     },

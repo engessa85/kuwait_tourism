@@ -38,34 +38,12 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCat
                         </button>
                     ))}
                 </div>
-
-                <div className="flex items-center gap-4">
-                    <div className="relative group">
-                        <button className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 flex items-center gap-3 hover:border-gray-300 transition-all bg-white min-w-[140px] justify-between">
-                            {t.categories.page.governorate}
-                            <span className="text-[10px] text-gray-400">▼</span>
-                        </button>
-                    </div>
-                    <div className="relative group">
-                        <button className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 flex items-center gap-3 hover:border-gray-300 transition-all bg-white min-w-[140px] justify-between">
-                            {t.categories.page.price_range}
-                            <span className="text-[10px] text-gray-400 font-bold">$</span>
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div className="flex items-center justify-between mt-8">
                 <p className="text-gray-500 text-sm">
                     {t.categories.page.showing_results.replace('{{count}}', resultsCount.toString())}
                 </p>
-                <div className="flex items-center gap-2 text-sm">
-                    <span className="text-gray-400">{t.categories.page.sort_by}</span>
-                    <button className="font-bold text-gray-900 flex items-center gap-1 group">
-                        {t.categories.page.recommended}
-                        <span className="text-[10px] transition-transform group-hover:translate-y-0.5">▼</span>
-                    </button>
-                </div>
             </div>
         </section>
     );

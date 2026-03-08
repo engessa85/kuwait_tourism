@@ -35,6 +35,11 @@ export const useAttractionsData = () => {
             ...t.experiences.items.scientific_center,
             categoryId: 'modern',
             image: '/kuwait_arts.jpg'
+        },
+        {
+            ...t.experiences.items.al_boom,
+            categoryId: 'dining',
+            image: '/kuwait_Al Boom_Steak_and_Seafood Restaurant.jpeg'
         }
     ];
 
