@@ -3,6 +3,7 @@
 import React from 'react';
 import AttractionCard from './AttractionCard';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAttractionsData } from './useAttractionsData';
 
 interface AttractionsGridProps {
     activeCategory: string;
@@ -10,51 +11,16 @@ interface AttractionsGridProps {
 
 const AttractionsGrid: React.FC<AttractionsGridProps> = ({ activeCategory }) => {
     const { t } = useLanguage();
-
-    const attractions = [
-        {
-            ...t.experiences.items.kuwait_towers,
-            image: '/kuwait_modern_cat.png'
-        },
-        {
-            ...t.experiences.items.mubarakiya,
-            image: '/kuwait_historical_cat.png'
-        },
-        {
-            ...t.experiences.items.avenues,
-            image: '/kuwait_shoping.webp'
-        },
-        {
-            ...t.experiences.items.grand_mosque_alt,
-            image: '/kuwait_grand_mosque.jpg'
-        },
-        {
-            ...t.experiences.items.shaheed_park,
-            image: '/kuwait_nature_cat.png'
-        },
-        {
-            ...t.experiences.items.scientific_center,
-            image: '/kuwait_arts.jpg'
-        },
-        // Duplicate for grid filling as in screenshot
-        {
-            ...t.experiences.items.kuwait_towers,
-            image: '/kuwait_modern_cat.png'
-        },
-        {
-            ...t.experiences.items.mubarakiya,
-            image: '/kuwait_historical_cat.png'
-        }
-    ];
+    const attractions = useAttractionsData();
 
     const filteredAttractions = activeCategory === 'all'
         ? attractions
-        : attractions.filter(attr => attr.category.toLowerCase().includes(activeCategory.toLowerCase()) || activeCategory === 'all');
+        : attractions.filter(attr => attr.categoryId === activeCategory);
 
     return (
         <section className="px-4 md:px-8 max-w-7xl mx-auto pb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {attractions.map((attr, idx) => (
+                {filteredAttractions.map((attr, idx) => (
                     <AttractionCard key={idx} {...attr} />
                 ))}
             </div>

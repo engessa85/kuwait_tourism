@@ -6,9 +6,10 @@ import { useLanguage } from '@/context/LanguageContext';
 interface CategoryFiltersProps {
     activeCategory: string;
     onCategoryChange: (category: string) => void;
+    resultsCount: number;
 }
 
-const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCategoryChange }) => {
+const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCategoryChange, resultsCount }) => {
     const { t, isRTL } = useLanguage();
 
     const filters = [
@@ -29,8 +30,8 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCat
                             key={filter.id}
                             onClick={() => onCategoryChange(filter.id)}
                             className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === filter.id
-                                    ? 'bg-gray-900 text-white shadow-lg'
-                                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                                ? 'bg-gray-900 text-white shadow-lg'
+                                : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
                                 }`}
                         >
                             {filter.label}
@@ -56,7 +57,7 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCat
 
             <div className="flex items-center justify-between mt-8">
                 <p className="text-gray-500 text-sm">
-                    {t.categories.page.showing_results.replace('{{count}}', '12')}
+                    {t.categories.page.showing_results.replace('{{count}}', resultsCount.toString())}
                 </p>
                 <div className="flex items-center gap-2 text-sm">
                     <span className="text-gray-400">{t.categories.page.sort_by}</span>
