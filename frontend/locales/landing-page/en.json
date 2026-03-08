@@ -14,13 +14,26 @@
     "categories": {
         "title": "Explore by Category",
         "description": "Find your perfect experience in Kuwait",
+        "view_all": "View All Categories",
         "items": {
+            "all": "All",
             "historical": "Historical",
             "modern": "Modern",
             "nature": "Nature",
             "shopping": "Shopping",
             "dining": "Dining",
             "arts": "Arts"
+        },
+        "page": {
+            "subtitle": "EXPLORE THE HERITAGE",
+            "title": "Discover the Soul of Kuwait",
+            "description": "From the bustling souqs of the past to the modern marvels of today, explore the hidden gems of the Gulf.",
+            "showing_results": "Showing {{count}} results",
+            "sort_by": "Sort by:",
+            "recommended": "Recommended",
+            "governorate": "Governorate",
+            "price_range": "Price Range",
+            "load_more": "Load More Attractions"
         }
     },
     "experiences": {
@@ -48,6 +61,54 @@
                 "title": "Al-Salmi Desert Stars",
                 "category": "Nature",
                 "description": "Experience a magical night of stargazing under the clear skies of the Kuwaiti desert."
+            },
+            "kuwait_towers": {
+                "title": "Kuwait Towers",
+                "category": "Modern",
+                "location": "Kuwait City",
+                "rating": 4.8,
+                "reviews": "1,240 reviews",
+                "description": "An iconic symbol of modern Kuwait, offering panoramic views of the city and the Arabian Gulf."
+            },
+            "mubarakiya": {
+                "title": "Souq Al-Mubarakiya",
+                "category": "Historical",
+                "location": "Kuwait City",
+                "rating": 4.9,
+                "reviews": "3,502 reviews",
+                "description": "Experience the traditional atmosphere, shop for spices, and enjoy authentic Kuwaiti cuisine."
+            },
+            "avenues": {
+                "title": "The Avenues",
+                "category": "Shopping",
+                "location": "Al Rai",
+                "rating": 4.7,
+                "reviews": "5,100 reviews",
+                "description": "The largest shopping mall in Kuwait, featuring international brands, theme parks, and cinema."
+            },
+            "grand_mosque_alt": {
+                "title": "Grand Mosque",
+                "category": "Religious",
+                "location": "Kuwait City",
+                "rating": 4.9,
+                "reviews": "980 reviews",
+                "description": "A stunning example of Islamic architecture, featuring intricate calligraphy and massive chandeliers."
+            },
+            "shaheed_park": {
+                "title": "Al Shaheed Park",
+                "category": "Nature",
+                "location": "Sharq",
+                "rating": 4.8,
+                "reviews": "2,150 reviews",
+                "description": "The largest urban park in Kuwait, offering beautiful landscapes, museums, and botanical gardens."
+            },
+            "scientific_center": {
+                "title": "The Scientific Center",
+                "category": "Edutainment",
+                "location": "Salmiya",
+                "rating": 4.6,
+                "reviews": "1,890 reviews",
+                "description": "Home to one of the largest aquariums in the Middle East, an IMAX theater, and interactive exhibits."
             }
         }
     },
