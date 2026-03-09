@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAttractionsData } from '@/components/AllCategories/useAttractionsData';
 import { LanguageProvider } from '@/context/LanguageContext';
-import Header from '@/components/Common/Header';
+import DetailHeader from '@/components/PlaceDetail/DetailHeader';
 import Footer from '@/components/Common/Footer';
 import PlaceHeader from '@/components/PlaceDetail/PlaceHeader';
 import ImageGallery from '@/components/PlaceDetail/ImageGallery';
@@ -29,7 +29,7 @@ const DetailPageContent = () => {
 
     return (
         <div className="min-h-screen bg-white">
-            <Header />
+            <DetailHeader />
             <main>
                 <PlaceHeader title={attraction.title} location={attraction.location} />
                 <ImageGallery images={[attraction.image]} />

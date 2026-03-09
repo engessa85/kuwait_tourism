@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 
-function CategoriesHeader() {
-    const { language, setLanguage, t } = useLanguage();
+function DetailHeader() {
+    const { language, setLanguage } = useLanguage();
 
     const toggleLanguage = () => {
         setLanguage(language === 'en' ? 'ar' : 'en');
@@ -31,8 +31,10 @@ function CategoriesHeader() {
 
                 {/* Navigation Links - REMOVED AS REQUESTED */}
 
-                {/* Action / Language Switcher */}
+                {/* Right Side Actions */}
                 <div className='flex items-center gap-4'>
+
+
                     <button
                         onClick={toggleLanguage}
                         className='bg-white border border-gray-200 text-gray-700 text-[12px] font-bold px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200'
@@ -49,4 +51,4 @@ function CategoriesHeader() {
     );
 }
 
-export default CategoriesHeader;
+export default DetailHeader;

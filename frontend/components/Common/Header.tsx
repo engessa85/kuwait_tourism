@@ -39,12 +39,15 @@ function Header() {
                 </nav>
 
                 {/* Action / Language Switcher */}
-                <div className='flex items-center'>
+                <div className='flex items-center gap-4'>
                     <button
                         onClick={toggleLanguage}
-                        className='bg-primary text-white text-[12px] font-bold px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm'
+                        className='bg-white border border-gray-200 text-gray-700 text-[12px] font-bold px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200'
                     >
                         {language === 'en' ? 'AR' : 'EN'}
+                    </button>
+                    <button className="bg-primary text-white text-[12px] font-bold px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm shadow-primary/20">
+                        Login
                     </button>
                 </div>
             </div>
