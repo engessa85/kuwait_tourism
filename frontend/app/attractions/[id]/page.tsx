@@ -10,11 +10,9 @@ import Footer from '@/components/Common/Footer';
 import PlaceHeader from '@/components/PlaceDetail/PlaceHeader';
 import ImageGallery from '@/components/PlaceDetail/ImageGallery';
 import InfoCards from '@/components/PlaceDetail/InfoCards';
-import PlaceTabs from '@/components/PlaceDetail/PlaceTabs';
 import AboutSection from '@/components/PlaceDetail/AboutSection';
 import LocationSection from '@/components/PlaceDetail/LocationSection';
 import BookingSidebar from '@/components/PlaceDetail/BookingSidebar';
-import NearbyAttractions from '@/components/PlaceDetail/NearbyAttractions';
 
 const DetailPageContent = () => {
     const params = useParams();
@@ -41,20 +39,21 @@ const DetailPageContent = () => {
                             fee={details.entry_fee}
                             rating={details.rating_summary}
                         />
-                        <PlaceTabs />
                         <AboutSection
                             title={attraction.title}
                             description={details.about}
                             extendedDescription={details.about_extended}
                             features={details.features}
                         />
-                        <LocationSection title={attraction.title} />
-                        <NearbyAttractions places={details.nearby} />
                     </div>
 
                     <div className="hidden lg:block">
                         <BookingSidebar />
                     </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 md:px-8 pb-24">
+                    <LocationSection title={attraction.title} />
                 </div>
             </main>
             <Footer />
