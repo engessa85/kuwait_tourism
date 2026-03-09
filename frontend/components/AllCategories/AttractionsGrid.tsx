@@ -21,7 +21,17 @@ const AttractionsGrid: React.FC<AttractionsGridProps> = ({ activeCategory }) => 
         <section className="px-4 md:px-8 max-w-7xl mx-auto pb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {filteredAttractions.map((attr, idx) => (
-                    <AttractionCard key={idx} {...attr} />
+                    <AttractionCard
+                        key={idx}
+                        id={attr.id}
+                        title={attr.title}
+                        category={attr.category}
+                        location={attr.location}
+                        rating={attr.rating}
+                        description={attr.description}
+                        image={attr.image}
+                        reviews={attr.reviews}
+                    />
                 ))}
             </div>
 

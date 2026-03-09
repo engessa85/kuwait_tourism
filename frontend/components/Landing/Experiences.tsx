@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Experiences = () => {
@@ -9,6 +10,7 @@ const Experiences = () => {
 
     const experienceItems = [
         {
+            id: 'grand_mosque',
             title: t.experiences.items.grand_mosque.title,
             category: t.experiences.items.grand_mosque.category,
             price: '15 KWD',
@@ -16,6 +18,7 @@ const Experiences = () => {
             description: t.experiences.items.grand_mosque.description
         },
         {
+            id: 'failaka',
             title: t.experiences.items.failaka.title,
             category: t.experiences.items.failaka.category,
             price: '22 KWD',
@@ -23,6 +26,7 @@ const Experiences = () => {
             description: t.experiences.items.failaka.description
         },
         {
+            id: 'mirror_house',
             title: t.experiences.items.mirror_house.title,
             category: t.experiences.items.mirror_house.category,
             price: '10 KWD',
@@ -30,6 +34,7 @@ const Experiences = () => {
             description: t.experiences.items.mirror_house.description
         },
         {
+            id: 'salmi_desert',
             title: t.experiences.items.salmi_desert.title,
             category: t.experiences.items.salmi_desert.category,
             price: '40 KWD',
@@ -74,9 +79,9 @@ const Experiences = () => {
                                 <p className="text-gray-500 text-sm leading-relaxed mb-6 grow line-clamp-2">
                                     {exp.description}
                                 </p>
-                                <button className="w-full border border-primary/20 hover:border-primary text-primary font-bold py-3 rounded-xl text-sm transition-all hover:bg-primary/5">
+                                <Link href={`/attractions/${exp.id}`} className="w-full border border-primary/20 hover:border-primary text-primary font-bold py-3 rounded-xl text-sm transition-all hover:bg-primary/5 text-center">
                                     {t.experiences.more}
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     ))}

@@ -65,10 +65,43 @@
             "kuwait_towers": {
                 "title": "Kuwait Towers",
                 "category": "Modern",
-                "location": "Kuwait City",
+                "location": "Arabian Gulf Street, Sharq District, Kuwait City",
                 "rating": 4.8,
                 "reviews": "1,240 reviews",
-                "description": "An iconic symbol of modern Kuwait, offering panoramic views of the city and the Arabian Gulf."
+                "description": "An iconic symbol of modern Kuwait, offering panoramic views of the city and the Arabian Gulf.",
+                "details": {
+                    "opening_hours": "Daily: 8:00 AM - 11:00 PM",
+                    "entry_fee": "Adults: KD 3.000, Children (4-12): KD 1.500",
+                    "rating_summary": "4.8 (2.4k Reviews)",
+                    "about": "The Kuwait Towers are a group of three slender towers in Kuwait City, standing on a promontory into the Persian Gulf. They were the sixth, and last, group in the larger system of the Kuwait Water Towers of 33 towers, and were built in a style differing from the other five groups. The Kuwait Towers were officially inaugurated in March 1979 and are regarded as a landmark and symbol of modern Kuwait.",
+                    "about_extended": "The main tower is 187 metres (614 ft) high and carries two spheres. The lower sphere holds in its bottom half a water tank of 4,500 cubic metres and in its upper half there is a restaurant that accommodates 90 people, a café, a lounge and a reception hall. The upper sphere, which rises to 123 metres (404 ft) above sea level and completes a full turn every 30 minutes, holds a café.",
+                    "features": [
+                        {
+                            "title": "Horizon Restaurant",
+                            "desc": "Fine dining at 82m altitude",
+                            "icon": "🍽️"
+                        },
+                        {
+                            "title": "Viewing Sphere",
+                            "desc": "360° Rotating View",
+                            "icon": "👁️"
+                        }
+                    ],
+                    "nearby": [
+                        {
+                            "id": "mubarakiya",
+                            "title": "Souq Al-Mubarakiya",
+                            "distance": "2.3km away",
+                            "image": "/kuwait_historical_cat.png"
+                        },
+                        {
+                            "id": "grand_mosque",
+                            "title": "Grand Mosque",
+                            "distance": "1.8km away",
+                            "image": "/kuwait_grand_mosque.jpg"
+                        }
+                    ]
+                }
             },
             "mubarakiya": {
                 "title": "Souq Al-Mubarakiya",

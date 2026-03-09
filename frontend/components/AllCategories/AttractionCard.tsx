@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface AttractionCardProps {
+    id: string;
     title: string;
     category: string;
     location: string;
@@ -13,6 +14,7 @@ interface AttractionCardProps {
 }
 
 const AttractionCard: React.FC<AttractionCardProps> = ({
+    id,
     title,
     category,
     location,
@@ -62,7 +64,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
 
                 <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-50">
                     <span className="text-gray-400 text-xs">{reviews}</span>
-                    <Link href="#" className="text-primary font-bold text-sm flex items-center gap-1.5 group/btn">
+                    <Link href={`/attractions/${id}`} className="text-primary font-bold text-sm flex items-center gap-1.5 group/btn">
                         Details
                         <span className="transition-transform group-hover/btn:translate-x-1">→</span>
                     </Link>
