@@ -14,7 +14,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ title }) => {
     const embedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
     return (
-        <div className="mb-0">
+        <div className="mb-4">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Location</h2>
             <div className="relative rounded-[2.5rem] overflow-hidden group shadow-md border border-gray-100 bg-gray-50 h-[1000px]">
                 <iframe
