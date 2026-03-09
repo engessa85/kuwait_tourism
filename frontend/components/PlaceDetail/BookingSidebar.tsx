@@ -42,9 +42,9 @@ const BookingSidebar = () => {
                 </div>
 
                 <button className="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-[1.5rem] text-white font-bold transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-3 active:scale-[0.98] group">
-                    Book Tickets
-                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    Add to favourite
+                    <svg className="w-5 h-5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                     </svg>
                 </button>
 
