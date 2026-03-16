@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
-function Header() {
+function Header({ showNav = true }: { showNav?: boolean }) {
     const { language, setLanguage, t } = useLanguage();
 
     const toggleLanguage = () => {
@@ -29,14 +29,16 @@ function Header() {
                 </div>
 
                 {/* Navigation Links */}
-                <nav className='hidden md:block'>
-                    <ul className='flex gap-8 text-[14px] font-medium text-gray-600'>
-                        <li><a href="#home" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.home}</a></li>
-                        <li><a href="#categories" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.categories}</a></li>
-                        <li><a href="#experiences" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.experiences}</a></li>
-                        <li><a href="#map" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.map}</a></li>
-                    </ul>
-                </nav>
+                {showNav && (
+                    <nav className='hidden md:block'>
+                        <ul className='flex gap-8 text-[14px] font-medium text-gray-600'>
+                            <li><a href="#home" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.home}</a></li>
+                            <li><a href="#categories" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.categories}</a></li>
+                            <li><a href="#experiences" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.experiences}</a></li>
+                            <li><a href="#map" className='hover:text-primary cursor-pointer transition-colors duration-200'>{t.nav.map}</a></li>
+                        </ul>
+                    </nav>
+                )}
 
                 {/* Action / Language Switcher */}
                 <div className='flex items-center gap-4'>
