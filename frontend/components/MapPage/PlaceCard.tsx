@@ -41,32 +41,9 @@ export default function PlaceCard({
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 py-1">
-                    {/* Top row with Tags and Bookmark */}
-                    <div className="flex justify-between items-start mb-0.5">
-                        <div className="flex gap-1.5">
-                            {isTopRated && (
-                                <div className="flex items-center gap-0.5 text-[9px] font-bold text-primary uppercase tracking-wide bg-primary/10 px-1.5 py-0.5 rounded">
-                                    ★ Top
-                                </div>
-                            )}
-                            {isOpen ? (
-                                <div className="flex items-center text-[9px] font-bold text-green-600 uppercase tracking-wide bg-green-50 px-1.5 py-0.5 rounded">
-                                    Open
-                                </div>
-                            ) : (
-                                <div className="flex items-center text-[9px] font-bold text-gray-500 uppercase tracking-wide bg-gray-50 px-1.5 py-0.5 rounded">
-                                    Closed
-                                </div>
-                            )}
-                        </div>
-                        <button className="text-gray-400 hover:text-primary transition-colors">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                        </button>
-                    </div>
-
-                    <h4 className="font-bold text-gray-900 text-sm mb-0.5 truncate">{title}</h4>
-                    <p className="text-gray-500 text-[11px] mb-1 flex items-center gap-1">
+                <div className="flex-1 py-4 flex flex-col justify-center">
+                    <h4 className="font-bold text-gray-900 text-base mb-1 truncate">{title}</h4>
+                    <p className="text-gray-500 text-xs mb-2 flex items-center gap-1">
                         {category} • {distance}
                     </p>
 

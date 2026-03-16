@@ -51,9 +51,9 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                 </Map>
             </APIProvider>
 
-            {/* Custom Info Window Overlay (Positioned bottom right on map area) */}
+            {/* Custom Info Window Overlay (Positioned bottom right on map area, left of controls) */}
             {activePlace && (
-                <div className="absolute bottom-6 right-6 z-10 animate-fade-in-up">
+                <div className="absolute bottom-6 right-20 z-10 animate-fade-in-up">
                     <PlaceInfoWindow
                         place={activePlace}
                         onClose={() => onPlaceSelect(null)}
@@ -61,8 +61,8 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                 </div>
             )}
 
-            {/* Map Controls */}
-            <div className="absolute right-6 top-6 flex flex-col gap-2 z-10">
+            {/* Map Controls (Positioned bottom right) */}
+            <div className="absolute right-6 bottom-6 flex flex-col gap-2 z-10">
                 <div className="bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
                     <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition-colors border-b border-gray-100">
                         <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
@@ -73,9 +73,6 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                 </div>
                 <button className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                </button>
-                <button className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </button>
             </div>
         </div>
