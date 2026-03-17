@@ -3,13 +3,41 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const { t } = useLanguage();
+    const { login } = useAuth();
+    const router = useRouter();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError('');
+        setIsSubmitting(true);
+
+        const success = await login(email, password);
+        if (success) {
+            router.push('/');
+        } else {
+            setError(t.language === 'en' ? 'Invalid email or password.' : 'البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+            setIsSubmitting(false);
+        }
+    };
 
     return (
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+                <div className="p-3 rounded-lg bg-red-50 text-red-500 text-sm border border-red-100">
+                    {error}
+                </div>
+            )}
             <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     {t.auth.login.email_label}
@@ -20,6 +48,8 @@ export default function LoginForm() {
                     type="email"
                     autoComplete="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                     placeholder={t.auth.login.email_placeholder}
                 />
@@ -36,6 +66,8 @@ export default function LoginForm() {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                         placeholder={t.auth.login.password_placeholder}
                     />
@@ -62,9 +94,10 @@ export default function LoginForm() {
 
             <button
                 type="submit"
-                className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
             >
-                {t.auth.login.submit}
+                {isSubmitting ? (t.language === 'en' ? 'Signing in...' : 'جاري الدخول...') : t.auth.login.submit}
             </button>
 
             <p className="text-center text-sm text-gray-600 mt-8">

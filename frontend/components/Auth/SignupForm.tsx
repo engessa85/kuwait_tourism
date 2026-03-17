@@ -3,14 +3,50 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const { t } = useLanguage();
+    const { signup } = useAuth();
+    const router = useRouter();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError('');
+
+        if (password !== confirmPassword) {
+            setError(t.language === 'en' ? 'Passwords do not match.' : 'كلمات المرور غير متطابقة.');
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        const success = await signup(fullName, email, password, confirmPassword);
+        if (success) {
+            router.push('/');
+        } else {
+            setError(t.language === 'en' ? 'Signup failed. Email might already be in use.' : 'فشل التسجيل. قد يكون البريد الإلكتروني مستخدماً بالفعل.');
+            setIsSubmitting(false);
+        }
+    };
 
     return (
-        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+            {error && (
+                <div className="p-3 rounded-lg bg-red-50 text-red-500 text-sm border border-red-100">
+                    {error}
+                </div>
+            )}
             <div className="space-y-2">
                 <label htmlFor="full-name" className="block text-sm font-medium text-gray-700">
                     {t.auth.signup.name_label}
@@ -20,6 +56,8 @@ export default function SignupForm() {
                     name="full-name"
                     type="text"
                     required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                     placeholder={t.auth.signup.name_placeholder}
                 />
@@ -35,6 +73,8 @@ export default function SignupForm() {
                     type="email"
                     autoComplete="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                     placeholder={t.auth.signup.email_placeholder}
                 />
@@ -51,6 +91,8 @@ export default function SignupForm() {
                         type={showPassword ? "text" : "password"}
                         autoComplete="new-password"
                         required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                         placeholder={t.auth.signup.password_placeholder}
                     />
@@ -66,7 +108,7 @@ export default function SignupForm() {
                         ) : (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268-2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         )}
                     </button>
@@ -84,6 +126,8 @@ export default function SignupForm() {
                         type={showConfirmPassword ? "text" : "password"}
                         autoComplete="new-password"
                         required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
                         placeholder={t.auth.signup.confirm_password_placeholder}
                     />
@@ -110,9 +154,10 @@ export default function SignupForm() {
 
             <button
                 type="submit"
-                className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
             >
-                {t.auth.signup.submit}
+                {isSubmitting ? (t.language === 'en' ? 'Creating account...' : 'جاري إنشاء الحساب...') : t.auth.signup.submit}
             </button>
 
             <p className="text-center text-sm text-gray-600 mt-6">
