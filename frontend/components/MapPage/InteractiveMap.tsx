@@ -18,6 +18,7 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
     const center = activePlace ? activePlace.position : defaultCenter;
 
     const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || '';
+    const GOOGLE_MAPS_MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID || 'DEMO_MAP_ID';
 
     return (
         <div className="w-full h-full relative">
@@ -28,7 +29,7 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                     gestureHandling={'greedy'}
                     disableDefaultUI={true}
                     className="w-full h-full"
-                    mapId="DEMO_MAP_ID"
+                    mapId={GOOGLE_MAPS_MAP_ID}
                 >
                     {/* Render Markers */}
                     {places.map(place => (

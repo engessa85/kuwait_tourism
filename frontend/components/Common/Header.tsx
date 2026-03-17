@@ -49,9 +49,11 @@ function Header({ showNav = true }: { showNav?: boolean }) {
                     >
                         {language === 'en' ? 'AR' : 'EN'}
                     </button>
-                    <button className="bg-primary text-white text-[12px] font-bold px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm shadow-primary/20">
-                        Login
-                    </button>
+                    <Link href="/login">
+                        <button className="bg-primary text-white text-[12px] font-bold px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm shadow-primary/20">
+                            Login
+                        </button>
+                    </Link>
                 </div>
             </div>
         </header>
