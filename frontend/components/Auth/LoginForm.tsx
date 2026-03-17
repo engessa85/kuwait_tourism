@@ -56,25 +56,7 @@ export default function LoginForm() {
                 </div>
             </div>
 
-            <div className="flex items-center justify-between py-1">
-                <div className="flex items-center">
-                    <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary/20"
-                    />
-                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-600">
-                        Remember me
-                    </label>
-                </div>
 
-                <div className="text-sm">
-                    <a href="#" className="font-medium text-primary hover:text-primary/80 transition-colors">
-                        Forgot your password?
-                    </a>
-                </div>
-            </div>
 
             <button
                 type="submit"

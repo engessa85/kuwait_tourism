@@ -104,18 +104,7 @@ export default function SignupForm() {
                 </div>
             </div>
 
-            <div className="flex items-center py-1">
-                <input
-                    id="terms"
-                    name="terms"
-                    type="checkbox"
-                    required
-                    className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary/20"
-                />
-                <label htmlFor="terms" className="ml-2 block text-sm text-gray-600">
-                    I agree to the <a href="#" className="font-medium text-primary hover:underline">Terms of Service</a> and <a href="#" className="font-medium text-primary hover:underline">Privacy Policy</a>
-                </label>
-            </div>
+
 
             <button
                 type="submit"
