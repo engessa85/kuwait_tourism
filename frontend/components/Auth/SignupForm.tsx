@@ -2,16 +2,18 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function SignupForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { t } = useLanguage();
 
     return (
         <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-2">
                 <label htmlFor="full-name" className="block text-sm font-medium text-gray-700">
-                    Full Name
+                    {t.auth.signup.name_label}
                 </label>
                 <input
                     id="full-name"
@@ -19,13 +21,13 @@ export default function SignupForm() {
                     type="text"
                     required
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                    placeholder="e.g. Mohamed Yehia"
+                    placeholder={t.auth.signup.name_placeholder}
                 />
             </div>
 
             <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email Address
+                    {t.auth.signup.email_label}
                 </label>
                 <input
                     id="email"
@@ -34,13 +36,13 @@ export default function SignupForm() {
                     autoComplete="email"
                     required
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                    placeholder="e.g. tourist@example.com"
+                    placeholder={t.auth.signup.email_placeholder}
                 />
             </div>
 
             <div className="space-y-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    Password
+                    {t.auth.signup.password_label}
                 </label>
                 <div className="relative">
                     <input
@@ -50,7 +52,7 @@ export default function SignupForm() {
                         autoComplete="new-password"
                         required
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                        placeholder="••••••••"
+                        placeholder={t.auth.signup.password_placeholder}
                     />
                     <button
                         type="button"
@@ -64,7 +66,7 @@ export default function SignupForm() {
                         ) : (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         )}
                     </button>
@@ -73,7 +75,7 @@ export default function SignupForm() {
 
             <div className="space-y-2">
                 <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
-                    Confirm Password
+                    {t.auth.signup.confirm_password_label}
                 </label>
                 <div className="relative">
                     <input
@@ -83,7 +85,7 @@ export default function SignupForm() {
                         autoComplete="new-password"
                         required
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                        placeholder="••••••••"
+                        placeholder={t.auth.signup.confirm_password_placeholder}
                     />
                     <button
                         type="button"
@@ -97,7 +99,7 @@ export default function SignupForm() {
                         ) : (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         )}
                     </button>
@@ -110,13 +112,13 @@ export default function SignupForm() {
                 type="submit"
                 className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all"
             >
-                Create Account
+                {t.auth.signup.submit}
             </button>
 
             <p className="text-center text-sm text-gray-600 mt-6">
-                Already have an account?{' '}
+                {t.auth.signup.has_account}{' '}
                 <Link href="/login" className="font-semibold text-primary hover:underline">
-                    Sign in
+                    {t.auth.signup.login_link}
                 </Link>
             </p>
         </form>

@@ -2,15 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const { t } = useLanguage();
 
     return (
         <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email Address
+                    {t.auth.login.email_label}
                 </label>
                 <input
                     id="email"
@@ -19,13 +21,13 @@ export default function LoginForm() {
                     autoComplete="email"
                     required
                     className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                    placeholder="e.g. tourist@example.com"
+                    placeholder={t.auth.login.email_placeholder}
                 />
             </div>
 
             <div className="space-y-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    Password
+                    {t.auth.login.password_label}
                 </label>
                 <div className="relative">
                     <input
@@ -35,7 +37,7 @@ export default function LoginForm() {
                         autoComplete="current-password"
                         required
                         className="block w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 placeholder-gray-400 bg-white"
-                        placeholder="••••••••"
+                        placeholder={t.auth.login.password_placeholder}
                     />
                     <button
                         type="button"
@@ -62,13 +64,13 @@ export default function LoginForm() {
                 type="submit"
                 className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all"
             >
-                Sign In
+                {t.auth.login.submit}
             </button>
 
             <p className="text-center text-sm text-gray-600 mt-8">
-                Don't have an account?{' '}
+                {t.auth.login.no_account}{' '}
                 <Link href="/signup" className="font-semibold text-primary hover:underline">
-                    Sign up for free
+                    {t.auth.login.signup_link}
                 </Link>
             </p>
         </form>

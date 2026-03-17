@@ -160,5 +160,38 @@
         "featured": "تجارب مميزة",
         "privacy": "سياسة الخصوصية",
         "terms": "شروط الخدمة"
+    },
+    "auth": {
+        "layout": {
+            "title": "اكتشف قلب \nالخليج",
+            "description": "من الأبراج الشهيرة إلى الجواهر الخفية في السوق، ابدأ رحلتك من هنا.",
+            "copyright": "© 2026 هيئة الكويت للسياحة. جميع الحقوق محفوظة."
+        },
+        "login": {
+            "title": "مرحباً بعودتك",
+            "description": "يرجى إدخال بياناتك لتسجيل الدخول إلى حسابك.",
+            "email_label": "البريد الإلكتروني",
+            "email_placeholder": "مثال: tourist@example.com",
+            "password_label": "كلمة المرور",
+            "password_placeholder": "••••••••",
+            "submit": "تسجيل الدخول",
+            "no_account": "ليس لديك حساب؟",
+            "signup_link": "سجل مجاناً"
+        },
+        "signup": {
+            "title": "إنشاء حساب",
+            "description": "سجل لتبدأ رحلتك عبر الجواهر الخفية في الكويت.",
+            "name_label": "الاسم الكامل",
+            "name_placeholder": "مثال: محمد يحيى",
+            "email_label": "البريد الإلكتروني",
+            "email_placeholder": "مثال: tourist@example.com",
+            "password_label": "كلمة المرور",
+            "password_placeholder": "••••••••",
+            "confirm_password_label": "تأكيد كلمة المرور",
+            "confirm_password_placeholder": "••••••••",
+            "submit": "إنشاء حساب",
+            "has_account": "لديك حساب بالفعل؟",
+            "login_link": "تسجيل دخول"
+        }
     }
 }

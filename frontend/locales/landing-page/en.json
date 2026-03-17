@@ -160,5 +160,38 @@
         "featured": "Featured Experiences",
         "privacy": "Privacy Policy",
         "terms": "Terms of Service"
+    },
+    "auth": {
+        "layout": {
+            "title": "Discover the Heart \nof the Gulf",
+            "description": "From the iconic towers to the hidden gems of the souq, start your journey here.",
+            "copyright": "© 2026 Kuwait Tourism Authority. All rights reserved."
+        },
+        "login": {
+            "title": "Welcome back",
+            "description": "Please enter your details to sign in to your account.",
+            "email_label": "Email Address",
+            "email_placeholder": "e.g. tourist@example.com",
+            "password_label": "Password",
+            "password_placeholder": "••••••••",
+            "submit": "Sign In",
+            "no_account": "Don't have an account?",
+            "signup_link": "Sign up for free"
+        },
+        "signup": {
+            "title": "Create an account",
+            "description": "Sign up to start your journey through the hidden gems of Kuwait.",
+            "name_label": "Full Name",
+            "name_placeholder": "e.g. Mohamed Yehia",
+            "email_label": "Email Address",
+            "email_placeholder": "e.g. tourist@example.com",
+            "password_label": "Password",
+            "password_placeholder": "••••••••",
+            "confirm_password_label": "Confirm Password",
+            "confirm_password_placeholder": "••••••••",
+            "submit": "Create Account",
+            "has_account": "Already have an account?",
+            "login_link": "Sign in"
+        }
     }
 }

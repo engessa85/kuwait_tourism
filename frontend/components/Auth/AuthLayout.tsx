@@ -4,13 +4,21 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 interface AuthLayoutProps {
     children: React.ReactNode;
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
+    mode?: 'login' | 'signup';
 }
 
-export default function AuthLayout({ children, title, description }: AuthLayoutProps) {
+export default function AuthLayout({ children, title, description, mode }: AuthLayoutProps) {
+    const { t, isRTL } = useLanguage();
+
+    const displayTitle = mode ? t.auth[mode].title : title;
+    const displayDescription = mode ? t.auth[mode].description : description;
+
     return (
         <div className="flex min-h-screen bg-white">
             {/* Left Side - Image and Branding */}
@@ -24,7 +32,7 @@ export default function AuthLayout({ children, title, description }: AuthLayoutP
                 />
                 <div className="absolute inset-0 bg-black/30" />
 
-                <div className="absolute top-10 left-10 z-10 space-y-12">
+                <div className={`absolute top-10 ${isRTL ? 'right-10' : 'left-10'} z-10 space-y-12`}>
                     <Link href="/" className="flex items-center gap-2 group">
                         <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg transition-transform group-hover:scale-105">
                             <Image src="/logo.png" alt="Logo" width={24} height={24} />
@@ -33,17 +41,17 @@ export default function AuthLayout({ children, title, description }: AuthLayoutP
                     </Link>
 
                     <div className="max-w-md">
-                        <h1 className="text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
-                            Discover the Heart <br /> of the Gulf
+                        <h1 className="text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg whitespace-pre-line">
+                            {t.auth.layout.title}
                         </h1>
                         <p className="text-xl text-white/90 drop-shadow-md">
-                            From the iconic towers to the hidden gems of the souq, start your journey here.
+                            {t.auth.layout.description}
                         </p>
                     </div>
                 </div>
 
-                <div className="absolute bottom-8 left-10 z-10 text-white/60 text-sm">
-                    © 2026 Kuwait Tourism Authority. All rights reserved.
+                <div className={`absolute bottom-8 ${isRTL ? 'right-10' : 'left-10'} z-10 text-white/60 text-sm`}>
+                    {t.auth.layout.copyright}
                 </div>
             </div>
 
@@ -60,8 +68,8 @@ export default function AuthLayout({ children, title, description }: AuthLayoutP
                     </div>
 
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{title}</h2>
-                        <p className="mt-2 text-gray-500">{description}</p>
+                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">{displayTitle}</h2>
+                        <p className="mt-2 text-gray-500">{displayDescription}</p>
                     </div>
 
                     <div className="mt-10">
