@@ -193,5 +193,33 @@
             "has_account": "Already have an account?",
             "login_link": "Sign in"
         }
+    },
+    "profile": {
+        "sidebar": {
+            "dashboard": "Dashboard",
+            "saved_attractions": "Saved Attractions",
+            "settings": "Settings",
+            "signout": "Signout",
+            "member_since": "Member since {{year}}",
+            "rank": "Desert Explorer Lvl 2"
+        },
+        "dashboard": {
+            "greeting": "Marhaba, {{name}}! 👋",
+            "subtitle": "Explore and manage your favorite attractions in the heart of Kuwait.",
+            "stats": {
+                "upcoming_trips": "Upcoming Trips",
+                "places_visited": "Places Visited",
+                "saved_places": "Saved Places",
+                "reviews_posted": "Reviews Posted"
+            },
+            "saved_attractions": {
+                "title": "Saved Attractions",
+                "view_details": "DETAILS"
+            },
+            "recent_reviews": {
+                "title": "Your Recent Reviews",
+                "view_all": "View all {{count}} reviews"
+            }
+        }
     }
 }

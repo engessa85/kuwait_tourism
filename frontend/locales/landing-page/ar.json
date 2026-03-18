@@ -193,5 +193,33 @@
             "has_account": "لديك حساب بالفعل؟",
             "login_link": "تسجيل دخول"
         }
+    },
+    "profile": {
+        "sidebar": {
+            "dashboard": "لوحة التحكم",
+            "saved_attractions": "المعالم المحفوظة",
+            "settings": "الإعدادات",
+            "signout": "تسجيل الخروج",
+            "member_since": "عضو منذ {{year}}",
+            "rank": "مستكشف الصحراء مستوى 2"
+        },
+        "dashboard": {
+            "greeting": "مرحباً، {{name}}! 👋",
+            "subtitle": "استكشف وادر أماكنك المفضلة في قلب الكويت.",
+            "stats": {
+                "upcoming_trips": "الرحلات القادمة",
+                "places_visited": "الأماكن التي تمت زيارتها",
+                "saved_places": "الأماكن المحفوظة",
+                "reviews_posted": "التقييمات المنشورة"
+            },
+            "saved_attractions": {
+                "title": "المعالم المحفوظة",
+                "view_details": "التفاصيل"
+            },
+            "recent_reviews": {
+                "title": "تقييماتك الأخيرة",
+                "view_all": "عرض جميع التقييمات الـ {{count}}"
+            }
+        }
     }
 }
