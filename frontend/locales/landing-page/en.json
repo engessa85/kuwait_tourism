@@ -141,6 +141,17 @@
                 "reviews": "1,500 reviews",
                 "description": "Savor the charcoal-grilled seafood, steak and other specialties of Al Boom. Diners will want to experience this unique dining venue aboard a traditional Arabic dhow. Beautiful teak with gold-leaf accents gives this landlocked vessel the atmosphere of luxury sailing."
             }
+        },
+        "reviews": {
+            "title": "Visitor Reviews",
+            "add_review": "Add a Review",
+            "login_to_review": "Please sign in to share your experience",
+            "rating_label": "Your Rating",
+            "comment_label": "Your Comment",
+            "comment_placeholder": "Share your thoughts about this place...",
+            "submit": "Post Review",
+            "no_reviews": "No reviews yet. Be the first to share your experience!",
+            "anonymous": "Anonymous Visitor"
         }
     },
     "map": {

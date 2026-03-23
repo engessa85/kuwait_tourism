@@ -13,6 +13,7 @@ import InfoCards from '@/components/PlaceDetail/InfoCards';
 import AboutSection from '@/components/PlaceDetail/AboutSection';
 import LocationSection from '@/components/PlaceDetail/LocationSection';
 import BookingSidebar from '@/components/PlaceDetail/BookingSidebar';
+import ReviewsSection from '@/components/PlaceDetail/ReviewsSection';
 
 const DetailPageContent = () => {
     const params = useParams();
@@ -45,6 +46,7 @@ const DetailPageContent = () => {
                             extendedDescription={details.about_extended}
                             features={details.features}
                         />
+                        <ReviewsSection />
                     </div>
 
                     <div className="hidden lg:block">
