@@ -1,3 +1,66 @@
+# version: '3.8'
+
+# services:
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     container_name: kuwait_tourism_backend
+#     ports:
+#       - "8000:8000"
+#     volumes:
+#       - ./backend:/app
+#     environment:
+#       - DEBUG=1
+#     command: python manage.py runserver 0.0.0.0:8000
+
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     container_name: kuwait_tourism_frontend
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - ./frontend:/app
+#       - /app/node_modules
+#       - /app/.next
+#     environment:
+#       - NODE_ENV=development
+#     depends_on:
+#       - backend
+#     command: npm run dev
+
+# version: '3.8'
+
+# services:
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     container_name: kuwait_tourism_backend
+#     ports:
+#       - "8000:8000"
+#     volumes:
+#       - ./backend:/app
+#     environment:
+#       - DEBUG=1
+#     command: python manage.py runserver 0.0.0.0:8000
+
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     container_name: kuwait_tourism_frontend
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - NODE_ENV=development
+#       - CHOKIDAR_USEPOLLING=true
+#     depends_on:
+#       - backend
+#     command: npm run dev
+
 version: '3.8'
 
 services:
@@ -8,11 +71,11 @@ services:
     container_name: kuwait_tourism_backend
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
     environment:
       - DEBUG=1
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
 
   frontend:
     build:
@@ -21,12 +84,9 @@ services:
     container_name: kuwait_tourism_frontend
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # عشان hot reload على Mac
     depends_on:
       - backend
     command: npm run dev
