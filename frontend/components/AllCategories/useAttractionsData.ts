@@ -27,7 +27,7 @@ export const useAttractionsData = () => {
         {
             id: 'grand_mosque',
             ...t.experiences.items.grand_mosque_alt,
-            categoryId: 'historical',
+            categoryId: 'religious',
             image: '/kuwait_grand_mosque.jpg'
         },
         {

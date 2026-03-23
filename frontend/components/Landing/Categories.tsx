@@ -15,6 +15,7 @@ const Categories = () => {
         { name: t.categories.items.shopping, image: '/kuwait_shoping.webp', icon: '🛍️' },
         { name: t.categories.items.dining, image: '/kuwait_dinning.webp', icon: '🍽️' },
         { name: t.categories.items.arts, image: '/kuwait_arts.jpg', icon: '🎨' },
+        { name: t.categories.items.religious, image: '/kuwait_grand_mosque.jpg', icon: '🕌' },
     ];
 
     return (
