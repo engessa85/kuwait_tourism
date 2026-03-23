@@ -9,13 +9,13 @@ const Categories = () => {
     const { t } = useLanguage();
 
     const categories = [
-        { name: t.categories.items.historical, image: '/kuwait_historical_cat.png', icon: '🏛️' },
-        { name: t.categories.items.modern, image: '/kuwait_modern_cat.png', icon: '🏙️' },
-        { name: t.categories.items.nature, image: '/kuwait_nature_cat.png', icon: '🏜️' },
-        { name: t.categories.items.shopping, image: '/kuwait_shoping.webp', icon: '🛍️' },
-        { name: t.categories.items.dining, image: '/kuwait_dinning.webp', icon: '🍽️' },
-        { name: t.categories.items.arts, image: '/kuwait_arts.jpg', icon: '🎨' },
-        { name: t.categories.items.religious, image: '/kuwait_grand_mosque.jpg', icon: '🕌' },
+        { id: 'historical', name: t.categories.items.historical, image: '/kuwait_historical_cat.png', icon: '🏛️' },
+        { id: 'modern', name: t.categories.items.modern, image: '/kuwait_modern_cat.png', icon: '🏙️' },
+        { id: 'nature', name: t.categories.items.nature, image: '/kuwait_nature_cat.png', icon: '🏜️' },
+        { id: 'shopping', name: t.categories.items.shopping, image: '/kuwait_shoping.webp', icon: '🛍️' },
+        { id: 'dining', name: t.categories.items.dining, image: '/kuwait_dinning.webp', icon: '🍽️' },
+        { id: 'arts', name: t.categories.items.arts, image: '/kuwait_arts.jpg', icon: '🎨' },
+        { id: 'religious', name: t.categories.items.religious, image: '/kuwait_grand_mosque.jpg', icon: '🕌' },
     ];
 
     return (
@@ -36,7 +36,11 @@ const Categories = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categories.map((category) => (
-                    <div key={category.name} className="relative h-64 rounded-2xl overflow-hidden group cursor-pointer">
+                    <Link 
+                        key={category.id} 
+                        href={`/categories/${category.id}`}
+                        className="relative h-64 rounded-2xl overflow-hidden group cursor-pointer block"
+                    >
                         <Image
                             src={category.image}
                             alt={category.name}
@@ -48,7 +52,7 @@ const Categories = () => {
                             <span className="text-2xl mb-2 block">{category.icon}</span>
                             <h3 className="text-xl font-bold">{category.name}</h3>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>

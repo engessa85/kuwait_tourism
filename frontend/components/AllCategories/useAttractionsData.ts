@@ -1,6 +1,17 @@
-'use client';
-
 import { useLanguage } from '@/context/LanguageContext';
+
+export interface Attraction {
+    id: string;
+    title: string;
+    location: string;
+    category: string;
+    categoryId: string;
+    image: string;
+    rating?: number;
+    reviews?: string;
+    description?: string;
+    details?: any;
+}
 
 export const useAttractionsData = () => {
     const { t } = useLanguage();

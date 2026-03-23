@@ -19,6 +19,7 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCat
         { id: 'nature', label: t.categories.items.nature },
         { id: 'shopping', label: t.categories.items.shopping },
         { id: 'dining', label: t.categories.items.dining },
+        { id: 'arts', label: t.categories.items.arts },
         { id: 'religious', label: t.categories.items.religious },
     ];
 
