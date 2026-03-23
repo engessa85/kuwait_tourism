@@ -99,22 +99,7 @@ export default function ProfilePage() {
                             <p className="text-gray-500 font-medium">{t.profile.dashboard.subtitle}</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-                            {[
-                                { label: t.profile.dashboard.stats.upcoming_trips, val: 2, icon: '✈️', bg: 'bg-blue-50' },
-                                { label: t.profile.dashboard.stats.places_visited, val: 12, icon: '🗺️', bg: 'bg-orange-50' },
-                                { label: t.profile.dashboard.stats.saved_places, val: 28, icon: '❤️', bg: 'bg-red-50' },
-                                { label: t.profile.dashboard.stats.reviews_posted, val: 5, icon: '⭐', bg: 'bg-yellow-50' }
-                            ].map((stat, idx) => (
-                                <div key={idx} className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                    <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center text-xl mb-4`}>
-                                        {stat.icon}
-                                    </div>
-                                    <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">{stat.label}</p>
-                                    <p className="text-3xl font-black text-gray-900">{stat.val}</p>
-                                </div>
-                            ))}
-                        </div>
+
 
                         <div className="flex flex-col lg:flex-row gap-12">
                             {/* Saved Attractions Gallery */}
@@ -169,34 +154,9 @@ export default function ProfilePage() {
                                 </div>
                             </div>
 
-                            {/* Recent Reviews Sidebar */}
-                            <div className="w-full lg:w-80">
-                                <div className="p-8 rounded-[40px] bg-white border border-gray-100 shadow-xl shadow-gray-200/20">
-                                    <h3 className="text-xl font-black text-gray-900 mb-8 tracking-tight">{t.profile.recent_reviews?.title || "Your Recent Reviews"}</h3>
-                                    <div className="space-y-8">
-                                        {[
-                                            { name: 'Desert Safari Camp', text: 'Absolutely magical sunset. The tea was perfect and the guide...', img: '/kuwait_salmi_desert.jpg', rate: 5 },
-                                            { name: 'The Avenues Mall', text: 'Huge place! Great for walking in the summer heat. Tons of food...', img: '/kuwait_shoping.webp', rate: 5 }
-                                        ].map((rev, idx) => (
-                                            <div key={idx} className="flex gap-4">
-                                                <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
-                                                    <Image src={rev.img} alt={rev.name} width={64} height={64} className="h-full w-full object-cover" />
-                                                </div>
-                                                <div className="flex-1">
-                                                    <h5 className="text-[14px] font-black text-gray-900 mb-1 leading-tight">{rev.name}</h5>
-                                                    <div className="flex text-[10px] text-yellow-500 mb-2">
-                                                        {'⭐'.repeat(rev.rate)}
-                                                    </div>
-                                                    <p className="text-[11px] text-gray-400 font-medium leading-relaxed">{rev.text}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <Link href="#" className="mt-12 block text-center text-xs font-bold text-gray-400 hover:text-primary transition-colors underline-offset-4 hover:underline uppercase">
-                                        {t.profile.dashboard.recent_reviews.view_all.replace('{{count}}', '28')}
-                                    </Link>
-                                </div>
-                            </div>
+
+
+
                         </div>
                     </div>
                 </main>
