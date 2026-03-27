@@ -35,11 +35,7 @@ const DetailPageContent = () => {
 
                 <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12 pb-8">
                     <div className="lg:col-span-2">
-                        <InfoCards
-                            hours={details.opening_hours}
-                            fee={details.entry_fee}
-                            rating={details.rating_summary}
-                        />
+
                         <AboutSection
                             title={attraction.title}
                             description={details.about}

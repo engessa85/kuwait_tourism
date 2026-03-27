@@ -8,9 +8,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('title_en', 'title_ar', 'category', 'slug')
+    list_display = ('title_en', 'subtitle_en', 'category', 'latitude', 'longitude', 'slug')
     list_filter = ('category',)
-    search_fields = ('title_en', 'title_ar', 'description_en', 'description_ar')
+    search_fields = ('title_en', 'title_ar', 'subtitle_en', 'subtitle_ar', 'description_en', 'description_ar')
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):

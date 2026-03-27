@@ -19,27 +19,7 @@ const BookingSidebar = () => {
                     </div>
                 </div>
 
-                <div className="space-y-4 mb-8">
-                    <div className="p-4 rounded-3xl border border-gray-100 bg-gray-50/30 group hover:border-blue-200 transition-colors cursor-pointer">
-                        <p className="text-[10px] text-gray-400 font-bold uppercase mb-1 flex items-center gap-2">
-                            📅 Date
-                        </p>
-                        <div className="flex items-center justify-between">
-                            <span className="text-sm font-bold text-gray-900">Today, 24 Oct</span>
-                            <span className="text-gray-300 text-[10px]">▼</span>
-                        </div>
-                    </div>
 
-                    <div className="p-4 rounded-3xl border border-gray-100 bg-gray-50/30 group hover:border-blue-200 transition-colors cursor-pointer">
-                        <p className="text-[10px] text-gray-400 font-bold uppercase mb-1 flex items-center gap-2">
-                            👥 Guests
-                        </p>
-                        <div className="flex items-center justify-between">
-                            <span className="text-sm font-bold text-gray-900">2 Adults</span>
-                            <span className="text-gray-300 text-[10px]">▼</span>
-                        </div>
-                    </div>
-                </div>
 
                 <button className="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-[1.5rem] text-white font-bold transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-3 active:scale-[0.98] group">
                     Add to favourite

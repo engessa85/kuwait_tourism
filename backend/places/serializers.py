@@ -24,8 +24,10 @@ class PlaceSerializer(serializers.ModelSerializer):
         model = Place
         fields = [
             'id', 'category', 'category_name', 'title_en', 'title_ar', 
-            'description_en', 'description_ar', 'price_en', 'price_ar', 
-            'image', 'slug', 'reviews', 'average_rating', 'created_at'
+            'subtitle_en', 'subtitle_ar', 'description_en', 'description_ar', 
+            'price_en', 'price_ar', 'latitude', 'longitude',
+            'image1', 'image2', 'image3', 'image4',
+            'slug', 'reviews', 'average_rating', 'created_at'
         ]
 
     def get_average_rating(self, obj):
