@@ -5,13 +5,18 @@ import Image from 'next/image';
 
 interface LocationSectionProps {
     title: string;
+    lat?: number | string;
+    lng?: number | string;
 }
 
-const LocationSection: React.FC<LocationSectionProps> = ({ title }) => {
-    // Encode title for Google Maps query
+const LocationSection: React.FC<LocationSectionProps> = ({ title, lat, lng }) => {
+    // Encode title for Google Maps query fallback
     const mapQuery = encodeURIComponent(`${title}, Kuwait`);
-    // Using the public Google Maps embed URL which doesn't strictly require a production API key for basic display
-    const embedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    
+    // Use coordinates if available, otherwise fallback to title search
+    const embedUrl = (lat && lng) 
+        ? `https://maps.google.com/maps?q=${lat},${lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`
+        : `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
     return (
         <div className="mb-4">

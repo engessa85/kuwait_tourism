@@ -1,36 +1,34 @@
-'use client';
-
 import React from 'react';
-import AttractionCard from './AttractionCard';
+import AttractionCard from '@/components/AllCategories/AttractionCard';
 import { useLanguage } from '@/context/LanguageContext';
-import { useAttractionsData } from './useAttractionsData';
+import { usePlaces } from '@/hooks/useApi';
 
 interface AttractionsGridProps {
-    activeCategory: string;
+    activeCategory: string; // This can be 'all' or a category slug
 }
 
 const AttractionsGrid: React.FC<AttractionsGridProps> = ({ activeCategory }) => {
-    const { t } = useLanguage();
-    const attractions = useAttractionsData();
+    const { t, language } = useLanguage();
+    const params = activeCategory !== 'all' ? `category_slug=${activeCategory}` : '';
+    const { places, loading, error } = usePlaces(params);
 
-    const filteredAttractions = activeCategory === 'all'
-        ? attractions
-        : attractions.filter(attr => attr.categoryId === activeCategory);
+    if (loading) return <div className="py-20 text-center text-gray-400">Loading attractions...</div>;
+    if (error) return null;
 
     return (
         <section className="px-4 md:px-8 max-w-7xl mx-auto pb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {filteredAttractions.map((attr, idx) => (
+                {places.map((place, idx) => (
                     <AttractionCard
                         key={idx}
-                        id={attr.id}
-                        title={attr.title}
-                        category={attr.category}
-                        location={attr.location}
-                        rating={attr.rating}
-                        description={attr.description}
-                        image={attr.image}
-                        reviews={attr.reviews}
+                        id={place.slug}
+                        title={language === 'en' ? place.title_en : place.title_ar}
+                        category={place.category_name}
+                        location={language === 'en' ? place.subtitle_en : place.subtitle_ar}
+                        rating={place.average_rating || 0}
+                        description={language === 'en' ? place.description_en : place.description_ar}
+                        image={place.image1 || '/placeholder.png'}
+                        reviews={`${place.reviews?.length || 0} reviews`}
                     />
                 ))}
             </div>

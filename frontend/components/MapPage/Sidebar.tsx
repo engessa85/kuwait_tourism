@@ -12,6 +12,7 @@ interface SidebarProps {
     onSearchChange: (query: string) => void;
     activeCategory: string;
     onCategoryChange: (category: string) => void;
+    categories?: string[];
 }
 
 export default function Sidebar({
@@ -21,8 +22,10 @@ export default function Sidebar({
     searchQuery,
     onSearchChange,
     activeCategory,
-    onCategoryChange
+    onCategoryChange,
+    categories = []
 }: SidebarProps) {
+    const displayCategories = categories.length > 0 ? categories : ['All', 'Historical', 'Shopping', 'Dining', 'Nature'];
     return (
         <div className="w-[380px] bg-white h-full border-r border-gray-100 flex flex-col shadow-sm z-10 shrink-0">
             {/* Header: Search and Categories */}
@@ -56,7 +59,7 @@ export default function Sidebar({
 
                 {/* Categories */}
                 <div className="flex gap-2 mb-2 overflow-x-auto pb-2 scrollbar-none">
-                    {CATEGORIES.map((cat, idx) => (
+                    {displayCategories.map((cat, idx) => (
                         <button
                             key={cat}
                             onClick={() => onCategoryChange(cat)}

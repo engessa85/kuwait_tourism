@@ -6,21 +6,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/AuthContext';
+import { useCategories } from '@/hooks/useApi';
 import { ChevronDown } from 'lucide-react';
 
 function Header({ showNav = true }: { showNav?: boolean }) {
     const { language, setLanguage, t, isRTL } = useLanguage();
     const { isAuthenticated, user, logout } = useAuth();
+    const { categories } = useCategories();
     const pathname = usePathname();
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
     const toggleLanguage = () => {
         setLanguage(language === 'en' ? 'ar' : 'en');
     };
-
-    const categories = Object.entries(t.categories.items)
-        .filter(([key]) => key !== 'all')
-        .map(([key, name]) => ({ id: key, name: name as string }));
 
     return (
         <header className='bg-white border-b border-gray-100 sticky top-0 z-50'>
@@ -68,10 +66,10 @@ function Header({ showNav = true }: { showNav?: boolean }) {
                                             {categories.map((cat) => (
                                                 <Link
                                                     key={cat.id}
-                                                    href={`/categories/${cat.id}`}
+                                                    href={`/categories/${cat.slug}`}
                                                     className='block px-4 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px]'
                                                 >
-                                                    {cat.name}
+                                                    {language === 'en' ? cat.name_en : cat.name_ar}
                                                 </Link>
                                             ))}
                                         </div>

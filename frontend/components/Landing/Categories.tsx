@@ -4,19 +4,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useCategories } from '@/hooks/useApi';
 
 const Categories = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const { categories, loading, error } = useCategories();
 
-    const categories = [
-        { id: 'historical', name: t.categories.items.historical, image: '/kuwait_historical_cat.png', icon: '🏛️' },
-        { id: 'modern', name: t.categories.items.modern, image: '/kuwait_modern_cat.png', icon: '🏙️' },
-        { id: 'nature', name: t.categories.items.nature, image: '/kuwait_nature_cat.png', icon: '🏜️' },
-        { id: 'shopping', name: t.categories.items.shopping, image: '/kuwait_shoping.webp', icon: '🛍️' },
-        { id: 'dining', name: t.categories.items.dining, image: '/kuwait_dinning.webp', icon: '🍽️' },
-        { id: 'arts', name: t.categories.items.arts, image: '/kuwait_arts.jpg', icon: '🎨' },
-        { id: 'religious', name: t.categories.items.religious, image: '/kuwait_grand_mosque.jpg', icon: '🕌' },
-    ];
+    if (loading) return <div className="py-20 text-center text-gray-400">Loading categories...</div>;
+    if (error) return null; // Or handle error
 
     return (
         <section id="categories" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
@@ -38,19 +33,21 @@ const Categories = () => {
                 {categories.map((category) => (
                     <Link 
                         key={category.id} 
-                        href={`/categories/${category.id}`}
+                        href={`/categories/${category.slug}`}
                         className="relative h-64 rounded-2xl overflow-hidden group cursor-pointer block"
                     >
                         <Image
-                            src={category.image}
-                            alt={category.name}
+                            src={category.image || '/placeholder.png'}
+                            alt={language === 'en' ? category.name_en : category.name_ar}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
                         <div className="absolute bottom-6 left-6 rtl:left-auto rtl:right-6 text-white text-left rtl:text-right">
-                            <span className="text-2xl mb-2 block">{category.icon}</span>
-                            <h3 className="text-xl font-bold">{category.name}</h3>
+                            <span className="text-2xl mb-2 block">{category.icon_emoji}</span>
+                            <h3 className="text-xl font-bold">
+                                {language === 'en' ? category.name_en : category.name_ar}
+                            </h3>
                         </div>
                     </Link>
                 ))}

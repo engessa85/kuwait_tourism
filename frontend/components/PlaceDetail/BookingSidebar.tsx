@@ -2,7 +2,11 @@
 
 import React from 'react';
 
-const BookingSidebar = () => {
+interface BookingSidebarProps {
+    price?: string;
+}
+
+const BookingSidebar = ({ price }: BookingSidebarProps) => {
     return (
         <aside className="sticky top-24">
             <div className="bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-blue-500/5">
@@ -10,7 +14,7 @@ const BookingSidebar = () => {
                     <div>
                         <p className="text-xs text-gray-400 font-medium mb-1 uppercase tracking-wider">Starting from</p>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-black text-gray-900">KD 3.000</span>
+                            <span className="text-2xl font-black text-gray-900">{price || 'KD 0.000'}</span>
                             <span className="text-xs text-gray-400 font-medium">/person</span>
                         </div>
                     </div>

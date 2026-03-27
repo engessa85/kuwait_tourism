@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/AuthContext';
 import { Star } from 'lucide-react';
+import { api } from '@/utils/api';
 
 interface Review {
     id: string;
@@ -13,46 +14,65 @@ interface Review {
     date: string;
 }
 
-const ReviewsSection = () => {
+interface ReviewsSectionProps {
+    placeId: number;
+    initialReviews?: any[];
+}
+
+const ReviewsSection = ({ placeId, initialReviews = [] }: ReviewsSectionProps) => {
     const { t, isRTL } = useLanguage();
     const { isAuthenticated, user } = useAuth();
     
-    const [reviews, setReviews] = useState<Review[]>([
-        {
-            id: '1',
-            userName: 'Ahmed Al-Kuwaiti',
-            rating: 5,
-            comment: 'Absolutely stunning architecture! A must-visit landmark.',
-            date: '2024-03-15'
-        },
-        {
-            id: '2',
-            userName: 'Sarah Jones',
-            rating: 4,
-            comment: 'Very Peaceful and well-maintained. The guided tour was very informative.',
-            date: '2024-03-10'
-        }
-    ]);
+    // Map backend reviews to local Review interface
+    const mapReviews = (revs: any[]) => revs.map(r => ({
+        id: r.id.toString(),
+        userName: r.user_full_name || t.experiences.reviews.anonymous,
+        rating: r.rating,
+        comment: r.comment,
+        date: r.created_at ? new Date(r.created_at).toISOString().split('T')[0] : ''
+    }));
 
+    const [reviews, setReviews] = useState<Review[]>(mapReviews(initialReviews));
     const [newRating, setNewRating] = useState(0);
     const [newComment, setNewComment] = useState('');
     const [hoverRating, setHoverRating] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // Update reviews if initialReviews changes (e.g. on slug change)
+    useEffect(() => {
+        setReviews(mapReviews(initialReviews));
+    }, [initialReviews]);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (newRating === 0 || !newComment.trim()) return;
+        if (newRating === 0 || !newComment.trim() || isSubmitting) return;
 
-        const review: Review = {
-            id: Date.now().toString(),
-            userName: user?.full_name || t.experiences.reviews.anonymous,
-            rating: newRating,
-            comment: newComment,
-            date: new Date().toISOString().split('T')[0]
-        };
+        setIsSubmitting(true);
+        try {
+            const data = await api.post('/places/reviews/', {
+                place: placeId,
+                rating: newRating,
+                comment: newComment
+            });
+            
+            // Backend returns the created review
+            const newReview: Review = {
+                id: data.id.toString(),
+                userName: data.user_full_name || user?.full_name || t.experiences.reviews.anonymous,
+                rating: data.rating,
+                comment: data.comment,
+                date: new Date(data.created_at).toISOString().split('T')[0]
+            };
 
-        setReviews([review, ...reviews]);
-        setNewRating(0);
-        setNewComment('');
+            setReviews([newReview, ...reviews]);
+            setNewRating(0);
+            setNewComment('');
+        } catch (err) {
+            console.error('Failed to submit review:', err);
+            alert('Failed to submit review. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (

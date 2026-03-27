@@ -4,44 +4,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { usePlaces } from '@/hooks/useApi';
 
 const Experiences = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const { places, loading, error } = usePlaces();
 
-    const experienceItems = [
-        {
-            id: 'grand_mosque',
-            title: t.experiences.items.grand_mosque.title,
-            category: t.experiences.items.grand_mosque.category,
-            price: '15 KWD',
-            image: '/kuwait_grand_mosque.jpg',
-            description: t.experiences.items.grand_mosque.description
-        },
-        {
-            id: 'failaka',
-            title: t.experiences.items.failaka.title,
-            category: t.experiences.items.failaka.category,
-            price: '22 KWD',
-            image: '/kuwait_Failaka_Island.jpg',
-            description: t.experiences.items.failaka.description
-        },
-        {
-            id: 'mirror_house',
-            title: t.experiences.items.mirror_house.title,
-            category: t.experiences.items.mirror_house.category,
-            price: '10 KWD',
-            image: '/kuwait_mirror_house.jpg',
-            description: t.experiences.items.mirror_house.description
-        },
-        {
-            id: 'salmi_desert',
-            title: t.experiences.items.salmi_desert.title,
-            category: t.experiences.items.salmi_desert.category,
-            price: '40 KWD',
-            image: '/kuwait_salmi_desert.jpg',
-            description: t.experiences.items.salmi_desert.description
-        }
-    ];
+    if (loading) return <div className="py-20 text-center text-gray-400">Loading experiences...</div>;
+    if (error) return null;
 
     return (
         <section id="experiences" className="py-20 bg-gray-50/50 px-4 md:px-8">
@@ -57,29 +27,31 @@ const Experiences = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {experienceItems.map((exp, idx) => (
+                    {places.map((place, idx) => (
                         <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group">
                             <div className="relative h-60 w-full">
                                 <Image
-                                    src={exp.image}
-                                    alt={exp.title}
+                                    src={place.image1 || '/placeholder.png'}
+                                    alt={language === 'en' ? place.title_en : place.title_ar}
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                                 <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-gray-900 shadow-sm border border-gray-100">
-                                    <span className="rtl:hidden">From </span><span className="text-primary">{exp.price}</span><span className="hidden rtl:inline"> تبدأ من</span>
+                                    <span className="rtl:hidden">From </span><span className="text-primary">{place.price}</span><span className="hidden rtl:inline"> تبدأ من</span>
                                 </div>
                             </div>
                             <div className="p-6 flex flex-col grow text-left rtl:text-right">
                                 <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 flex items-center gap-2 rtl:flex-row-reverse">
                                     <span className="w-1 h-1 bg-primary rounded-full"></span>
-                                    {exp.category}
+                                    {place.category_name}
                                 </span>
-                                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">{exp.title}</h3>
+                                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                                    {language === 'en' ? place.title_en : place.title_ar}
+                                </h3>
                                 <p className="text-gray-500 text-sm leading-relaxed mb-6 grow line-clamp-2">
-                                    {exp.description}
+                                    {language === 'en' ? place.description_en : place.description_ar}
                                 </p>
-                                <Link href={`/attractions/${exp.id}`} className="w-full border border-primary/20 hover:border-primary text-primary font-bold py-3 rounded-xl text-sm transition-all hover:bg-primary/5 text-center">
+                                <Link href={`/attractions/${place.slug}`} className="w-full border border-primary/20 hover:border-primary text-primary font-bold py-3 rounded-xl text-sm transition-all hover:bg-primary/5 text-center">
                                     {t.experiences.more}
                                 </Link>
                             </div>

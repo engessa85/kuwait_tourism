@@ -3,7 +3,7 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
-import { useAttractionsData } from '@/components/AllCategories/useAttractionsData';
+import { usePlace } from '@/hooks/useApi';
 import { LanguageProvider } from '@/context/LanguageContext';
 import DetailHeader from '@/components/PlaceDetail/DetailHeader';
 import Footer from '@/components/Common/Footer';
@@ -17,41 +17,47 @@ import ReviewsSection from '@/components/PlaceDetail/ReviewsSection';
 
 const DetailPageContent = () => {
     const params = useParams();
-    const id = params.id as string;
-    const attractions = useAttractionsData();
-    const { t } = useLanguage();
+    const slug = params.id as string;
+    const { language, t } = useLanguage();
+    const { place, loading, error } = usePlace(slug);
 
-    const attraction = attractions.find(a => a.id === id) || attractions[0];
+    if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (error || !place) return <div className="min-h-screen flex items-center justify-center text-red-500">Place not found</div>;
 
-    // Fallback/Mock data for details if not present (using Kuwait Towers as base for design)
-    const details = attraction.details || attractions[0].details;
+    const images = [place.image1, place.image2, place.image3, place.image4].filter(Boolean);
 
     return (
         <div className="min-h-screen bg-white">
             <DetailHeader />
             <main>
-                <PlaceHeader title={attraction.title} location={attraction.location} />
-                <ImageGallery images={[attraction.image]} />
+                <PlaceHeader 
+                    title={language === 'en' ? place.title_en : place.title_ar} 
+                    location={language === 'en' ? place.subtitle_en : place.subtitle_ar} 
+                />
+                <ImageGallery images={images.length > 0 ? images : ['/placeholder.png']} />
 
                 <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12 pb-8">
                     <div className="lg:col-span-2">
-
                         <AboutSection
-                            title={attraction.title}
-                            description={details.about}
-                            extendedDescription={details.about_extended}
-                            features={details.features}
+                            title={language === 'en' ? place.title_en : place.title_ar}
+                            description={language === 'en' ? place.description_en : place.description_ar}
+                            extendedDescription={""} // Add if needed in model
+                            features={[]} // Add if needed in model
                         />
-                        <ReviewsSection />
+                        <ReviewsSection placeId={place.id} initialReviews={place.reviews} />
                     </div>
 
                     <div className="hidden lg:block">
-                        <BookingSidebar />
+                        <BookingSidebar price={place.price} />
                     </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <LocationSection title={attraction.title} />
+                    <LocationSection 
+                        title={language === 'en' ? place.title_en : place.title_ar} 
+                        lat={place.latitude}
+                        lng={place.longitude}
+                    />
                 </div>
             </main>
             <Footer />

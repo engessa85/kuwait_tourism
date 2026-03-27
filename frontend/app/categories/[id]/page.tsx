@@ -7,17 +7,36 @@ import Footer from '@/components/Common/Footer';
 import HeaderSection from '@/components/AllCategories/HeaderSection';
 import AttractionsGrid from '@/components/AllCategories/AttractionsGrid';
 import { LanguageProvider } from '@/context/LanguageContext';
-import { useAttractionsData } from '@/components/AllCategories/useAttractionsData';
 import { useLanguage } from '@/context/LanguageContext';
+import { api } from '@/utils/api';
+import AttractionCard from '@/components/AllCategories/AttractionCard';
 
 const CategoryPageContent = () => {
     const params = useParams();
-    const id = params.id as string;
-    const { t } = useLanguage();
-    const attractions = useAttractionsData();
+    const slug = params.id as string;
+    const { t, language } = useLanguage();
+    const [category, setCategory] = React.useState<any>(null);
+    const [loading, setLoading] = React.useState(true);
 
-    // Verify if category exists in translations
-    const categoryName = t.categories.items[id] || id;
+    React.useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const categories = await api.getCategories();
+                const found = categories.find((c: any) => c.slug === slug);
+                setCategory(found);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCategory();
+    }, [slug]);
+
+    if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (!category) return <div className="min-h-screen flex items-center justify-center">Category not found</div>;
+
+    const categoryName = language === 'en' ? category.name_en : category.name_ar;
 
     return (
         <div className="min-h-screen bg-white">
@@ -29,7 +48,7 @@ const CategoryPageContent = () => {
                         <span>/</span>
                         <a href="/categories" className="hover:text-primary transition-colors">{t.nav.categories}</a>
                         <span>/</span>
-                        <span className="text-gray-900 font-medium capitalize">{categoryName}</span>
+                        <span className="text-gray-900 font-medium">{categoryName}</span>
                     </nav>
                     
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 capitalize">
@@ -41,7 +60,7 @@ const CategoryPageContent = () => {
                 </div>
 
                 <div className="pb-20">
-                    <AttractionsGrid activeCategory={id} />
+                    <AttractionsGrid activeCategory={slug} />
                 </div>
             </main>
             <Footer />
