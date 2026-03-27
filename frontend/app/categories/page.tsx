@@ -4,17 +4,17 @@ import React, { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import CategoriesHeader from '@/components/AllCategories/CategoriesHeader';
 import Footer from '@/components/Common/Footer';
+import { LanguageProvider, useLanguage } from '@/context/LanguageContext';
 import HeaderSection from '@/components/AllCategories/HeaderSection';
 import CategoryFilters from '@/components/AllCategories/CategoryFilters';
 import AttractionsGrid from '@/components/AllCategories/AttractionsGrid';
-import { LanguageProvider } from '@/context/LanguageContext';
-import { useAttractionsData } from '@/components/AllCategories/useAttractionsData';
-import { Attraction } from '@/components/AllCategories/useAttractionsData';
+import { useCategories, usePlaces } from '@/hooks/useApi';
 
 const AllCategoriesPageContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const filterParam = searchParams.get('filter') || 'all';
+    const { t } = useLanguage();
     
     // Use the URL param as the source of truth
     const activeCategory = filterParam;
@@ -28,11 +28,13 @@ const AllCategoriesPageContent = () => {
         router.push(`/categories?${params.toString()}`, { scroll: false });
     };
 
-    const attractions = useAttractionsData();
+    const { categories, loading: catLoading } = useCategories();
+    // For resultsCount, we fetch all places initially or filter them
+    const { places, loading: placesLoading } = usePlaces(activeCategory !== 'all' ? `category_slug=${activeCategory}` : '');
 
-    const resultsCount = activeCategory === 'all'
-        ? attractions.length
-        : attractions.filter((attr: Attraction) => attr.categoryId === activeCategory).length;
+    if (catLoading || placesLoading) return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
+
+    const resultsCount = places.length;
 
     return (
         <div className="min-h-screen bg-white">
@@ -43,6 +45,7 @@ const AllCategoriesPageContent = () => {
                     activeCategory={activeCategory}
                     onCategoryChange={setActiveCategory}
                     resultsCount={resultsCount}
+                    categories={categories}
                 />
                 <AttractionsGrid activeCategory={activeCategory} />
             </main>

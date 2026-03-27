@@ -7,20 +7,18 @@ interface CategoryFiltersProps {
     activeCategory: string;
     onCategoryChange: (category: string) => void;
     resultsCount: number;
+    categories?: any[];
 }
 
-const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCategoryChange, resultsCount }) => {
-    const { t, isRTL } = useLanguage();
+const CategoryFilters: React.FC<CategoryFiltersProps> = ({ activeCategory, onCategoryChange, resultsCount, categories = [] }) => {
+    const { t, language, isRTL } = useLanguage();
 
     const filters = [
-        { id: 'all', label: t.categories.items.all },
-        { id: 'historical', label: t.categories.items.historical },
-        { id: 'modern', label: t.categories.items.modern },
-        { id: 'nature', label: t.categories.items.nature },
-        { id: 'shopping', label: t.categories.items.shopping },
-        { id: 'dining', label: t.categories.items.dining },
-        { id: 'arts', label: t.categories.items.arts },
-        { id: 'religious', label: t.categories.items.religious },
+        { id: 'all', label: t.categories.items.all || 'All' },
+        ...categories.map(cat => ({
+            id: cat.slug,
+            label: language === 'en' ? cat.name_en : cat.name_ar
+        }))
     ];
 
     return (
