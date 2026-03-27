@@ -29,7 +29,7 @@ export const api = {
         apiFetch(endpoint, { ...options, method: 'GET' }),
 
     post: (endpoint: string, body: any, options: RequestInit = {}) =>
-        apiFetch(endpoint, { ...options, method: 'POST', body: JSON.stringify(body) }).then(res => res.json()),
+        apiFetch(endpoint, { ...options, method: 'POST', body: JSON.stringify(body) }),
 
     getCategories: () => apiFetch('/places/categories/').then(res => res.json()),
     getPlaces: (params?: string) => apiFetch(`/places/places/${params ? `?${params}` : ''}`).then(res => res.json()),

@@ -49,11 +49,14 @@ const ReviewsSection = ({ placeId, initialReviews = [] }: ReviewsSectionProps) =
 
         setIsSubmitting(true);
         try {
-            const data = await api.post('/places/reviews/', {
+            const res = await api.post('/places/reviews/', {
                 place: placeId,
                 rating: newRating,
                 comment: newComment
             });
+            
+            if (!res.ok) throw new Error('Failed to submit review');
+            const data = await res.json();
             
             // Backend returns the created review
             const newReview: Review = {
