@@ -30,12 +30,14 @@ const Experiences = () => {
                     {places.map((place, idx) => (
                         <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group">
                             <div className="relative h-60 w-full">
-                                <Image
-                                    src={place.image1 || '/placeholder.png'}
-                                    alt={language === 'en' ? place.title_en : place.title_ar}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
+                                <Link href={`/attractions/${place.slug}`}>
+                                    <Image
+                                        src={place.image1 || '/placeholder.png'}
+                                        alt={language === 'en' ? place.title_en : place.title_ar}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </Link>
                                 <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-gray-900 shadow-sm border border-gray-100">
                                     <span className="rtl:hidden">From </span><span className="text-primary">{place.price}</span><span className="hidden rtl:inline"> تبدأ من</span>
                                 </div>
@@ -45,9 +47,11 @@ const Experiences = () => {
                                     <span className="w-1 h-1 bg-primary rounded-full"></span>
                                     {place.category_name}
                                 </span>
-                                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
-                                    {language === 'en' ? place.title_en : place.title_ar}
-                                </h3>
+                                <Link href={`/attractions/${place.slug}`}>
+                                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                                        {language === 'en' ? place.title_en : place.title_ar}
+                                    </h3>
+                                </Link>
                                 <p className="text-gray-500 text-sm leading-relaxed mb-6 grow line-clamp-2">
                                     {language === 'en' ? place.description_en : place.description_ar}
                                 </p>

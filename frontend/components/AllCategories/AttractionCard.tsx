@@ -24,14 +24,22 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
     reviews
 }) => {
     return (
+
+
+
         <div className="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col group h-full">
             <div className="relative h-64 w-full">
-                <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+
+                <Link href={`/attractions/${id}`}>
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                </Link>
+
+
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-bold text-gray-900 uppercase tracking-widest shadow-sm">
                     {category}
                 </div>
@@ -43,7 +51,9 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
             </div>
             <div className="p-6 flex flex-col grow">
                 <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">{title}</h3>
+                    <Link href={`/attractions/${id}`}>
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">{title}</h3>
+                    </Link>
                     <div className="flex items-center gap-1.5 bg-yellow-400/10 px-2 py-1 rounded-lg">
                         <span className="text-yellow-500 text-sm">★</span>
                         <span className="text-gray-900 text-sm font-bold">{rating}</span>
