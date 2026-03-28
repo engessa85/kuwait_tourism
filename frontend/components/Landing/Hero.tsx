@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import Link from 'next/link';
 
 const Hero = () => {
     const { t } = useLanguage();
@@ -33,10 +34,12 @@ const Hero = () => {
                 <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-10 font-light leading-relaxed">
                     {t.hero.description}
                 </p>
-                <button className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 shadow-xl shadow-primary/20 flex items-center gap-2 group">
-                    {t.hero.cta}
-                    <span className="transform group-hover:translate-x-1 transition-transform rtl:rotate-180">→</span>
-                </button>
+                <Link href="/categories" className='cursor-pointer'>
+                    <button className="cursor-pointer bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 shadow-xl shadow-primary/20 flex items-center gap-2 group">
+                        {t.hero.cta}
+                        <span className="transform group-hover:translate-x-1 transition-transform rtl:rotate-180">→</span>
+                    </button>
+                </Link>
             </div>
         </section>
     );
