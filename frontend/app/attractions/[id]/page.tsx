@@ -30,9 +30,9 @@ const DetailPageContent = () => {
         <div className="min-h-screen bg-white">
             <DetailHeader />
             <main>
-                <PlaceHeader 
-                    title={language === 'en' ? place.title_en : place.title_ar} 
-                    location={language === 'en' ? place.subtitle_en : place.subtitle_ar} 
+                <PlaceHeader
+                    title={language === 'en' ? place.title_en : place.title_ar}
+                    location={language === 'en' ? place.subtitle_en : place.subtitle_ar}
                 />
                 <ImageGallery images={images.length > 0 ? images : ['/placeholder.png']} />
 
@@ -53,8 +53,8 @@ const DetailPageContent = () => {
                 </div>
 
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <LocationSection 
-                        title={language === 'en' ? place.title_en : place.title_ar} 
+                    <LocationSection
+                        title={language === 'en' ? place.title_en : place.title_ar}
                         lat={place.latitude}
                         lng={place.longitude}
                     />
