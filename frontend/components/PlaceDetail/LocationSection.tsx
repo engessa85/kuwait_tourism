@@ -13,8 +13,14 @@ const LocationSection: React.FC<LocationSectionProps> = ({ title, lat, lng }) =>
     // Encode title for Google Maps query fallback
     const mapQuery = encodeURIComponent(`${title}, Kuwait`);
     
+    // Ensure coordinates are valid numbers and not NaN
+    const hasValidCoords = lat !== undefined && lng !== undefined && 
+                           lat !== null && lng !== null &&
+                           lat !== '' && lng !== '' &&
+                           !isNaN(Number(lat)) && !isNaN(Number(lng));
+    
     // Use coordinates if available, otherwise fallback to title search
-    const embedUrl = (lat && lng) 
+    const embedUrl = hasValidCoords
         ? `https://maps.google.com/maps?q=${lat},${lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`
         : `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 

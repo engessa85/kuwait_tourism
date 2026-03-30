@@ -21,7 +21,9 @@ export default function MapPage() {
 
     const dynamicCategories = ['All', ...categories.map(c => language === 'en' ? c.name_en : c.name_ar)];
 
-    const mappedPlaces = places.map(p => ({
+    const validPlaces = places.filter(p => p.latitude && p.longitude);
+
+    const mappedPlaces = validPlaces.map(p => ({
         id: p.slug,
         title: language === 'en' ? p.title_en : p.title_ar,
         category: p.category_name,
@@ -44,29 +46,27 @@ export default function MapPage() {
     });
 
     return (
-        <LanguageProvider>
-            <div className="flex flex-col h-screen overflow-hidden">
-                <Header showNav={false} />
-                <div className="flex flex-1 bg-gray-50 overflow-hidden">
-                    <Sidebar
+        <div className="flex flex-col h-screen overflow-hidden">
+            <Header showNav={false} />
+            <div className="flex flex-1 bg-gray-50 overflow-hidden">
+                <Sidebar
+                    places={filteredPlaces}
+                    activePlaceId={activePlaceId}
+                    onPlaceSelect={setActivePlaceId}
+                    searchQuery={searchQuery}
+                    onSearchChange={setSearchQuery}
+                    activeCategory={activeCategory}
+                    onCategoryChange={setActiveCategory}
+                    categories={dynamicCategories}
+                />
+                <div className="flex-1 relative">
+                    <InteractiveMap
                         places={filteredPlaces}
                         activePlaceId={activePlaceId}
                         onPlaceSelect={setActivePlaceId}
-                        searchQuery={searchQuery}
-                        onSearchChange={setSearchQuery}
-                        activeCategory={activeCategory}
-                        onCategoryChange={setActiveCategory}
-                        categories={dynamicCategories}
                     />
-                    <div className="flex-1 relative">
-                        <InteractiveMap
-                            places={filteredPlaces}
-                            activePlaceId={activePlaceId}
-                            onPlaceSelect={setActivePlaceId}
-                        />
-                    </div>
                 </div>
             </div>
-        </LanguageProvider>
+        </div>
     );
 }

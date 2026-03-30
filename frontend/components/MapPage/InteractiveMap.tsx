@@ -46,20 +46,27 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                     mapId={GOOGLE_MAPS_MAP_ID}
                 >
                     {/* Render Markers */}
-                    {places.map(place => (
-                        <AdvancedMarker
-                            key={`marker-${place.id}`}
-                            position={place.position}
-                            onClick={() => onPlaceSelect(place.id)}
-                        >
-                            <Pin
-                                background={activePlaceId === place.id ? '#1a4eff' : '#ea4335'}
-                                borderColor={activePlaceId === place.id ? '#ffffff' : '#992116'}
-                                glyphColor={'#ffffff'}
-                                scale={activePlaceId === place.id ? 1.2 : 1}
-                            />
-                        </AdvancedMarker>
-                    ))}
+                    {places.map(place => {
+                        // Skip rendering if position is invalid
+                        if (!place.position || isNaN(place.position.lat) || isNaN(place.position.lng)) {
+                            return null;
+                        }
+
+                        return (
+                            <AdvancedMarker
+                                key={`marker-${place.id}`}
+                                position={place.position}
+                                onClick={() => onPlaceSelect(place.id)}
+                            >
+                                <Pin
+                                    background={activePlaceId === place.id ? '#1a4eff' : '#ea4335'}
+                                    borderColor={activePlaceId === place.id ? '#ffffff' : '#992116'}
+                                    glyphColor={'#ffffff'}
+                                    scale={activePlaceId === place.id ? 1.2 : 1}
+                                />
+                            </AdvancedMarker>
+                        );
+                    })}
 
                     {/* Render InfoWindow directly without Google Maps InfoWindow component for exact UI overlay positioning relative to right side layout or center overlay? 
                     The design shows the InfoWindow as a floating card overlay right on the map, near the bottom right. We will render it as a standard absolute positioned div inside the map container instead of a true InfoWindow which follows the pin, as it matches the design better for a fixed info panel or we can use generic CSS placing since the image shows a large card covering the bottom right map area. Let's place it absolutely for now. */}
