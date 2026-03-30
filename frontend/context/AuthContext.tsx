@@ -21,6 +21,7 @@ interface AuthContextType {
     signup: (full_name: string, email: string, password: string, confirm_password: string) => Promise<boolean>;
     logout: () => void;
     updateProfile: (data: FormData) => Promise<boolean>;
+    fetchMe: () => Promise<void>;
     loading: boolean;
 }
 
@@ -115,7 +116,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, signup, logout, updateProfile, loading }}>
+        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, signup, logout, updateProfile, fetchMe, loading }}>
             {children}
         </AuthContext.Provider>
     );

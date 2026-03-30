@@ -48,7 +48,11 @@ const DetailPageContent = () => {
                     </div>
 
                     <div className="hidden lg:block">
-                        <BookingSidebar price={place.price} />
+                        <BookingSidebar 
+                            price={place.price} 
+                            placeId={place.id} 
+                            initialIsFavorite={place.is_favorite} 
+                        />
                     </div>
                 </div>
 

@@ -41,6 +41,7 @@ class PlaceSerializer(serializers.ModelSerializer):
     category_name = serializers.ReadOnlyField(source='category.name_en')
     reviews = ReviewSerializer(many=True, read_only=True)
     average_rating = serializers.SerializerMethodField()
+    is_favorite = serializers.SerializerMethodField()
 
     class Meta:
         model = Place
@@ -48,8 +49,14 @@ class PlaceSerializer(serializers.ModelSerializer):
             'id', 'category', 'category_name', 'title_en', 'title_ar', 
             'subtitle_en', 'subtitle_ar', 'description_en', 'description_ar', 
             'image1', 'image2', 'image3', 'image4', 'price',
-            'latitude', 'longitude', 'slug', 'average_rating', 'reviews'
+            'latitude', 'longitude', 'slug', 'average_rating', 'reviews', 'is_favorite'
         ]
 
     def get_average_rating(self, obj):
         return obj.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+
+    def get_is_favorite(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return Favorite.objects.filter(user=request.user, place=obj).exists()
+        return False

@@ -40,14 +40,9 @@ export default function ReviewsTab() {
     }, []);
 
     const handleDelete = async (id: number) => {
+        if (!window.confirm("Are you sure you want to delete this review?")) return;
         try {
-            const token = localStorage.getItem('access_token');
-            const res = await fetch(`http://localhost:8000/api/places/reviews/${id}/`, {
-                method: 'DELETE',
-                headers: {
-                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-                }
-            });
+            const res = await api.delete(`/places/reviews/${id}/`);
             if (res.ok) {
                 setReviews(reviews.filter(r => r.id !== id));
             }
@@ -58,17 +53,9 @@ export default function ReviewsTab() {
 
     const handleUpdate = async (id: number) => {
         try {
-            const token = localStorage.getItem('access_token');
-            const res = await fetch(`http://localhost:8000/api/places/reviews/${id}/`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-                },
-                body: JSON.stringify({
-                    comment: editComment,
-                    rating: editRating
-                })
+            const res = await api.patch(`/places/reviews/${id}/`, {
+                comment: editComment,
+                rating: editRating
             });
             if (res.ok) {
                 const updated = await res.json();

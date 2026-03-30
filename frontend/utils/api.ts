@@ -31,6 +31,12 @@ export const api = {
     post: (endpoint: string, body: any, options: RequestInit = {}) =>
         apiFetch(endpoint, { ...options, method: 'POST', body: JSON.stringify(body) }),
 
+    patch: (endpoint: string, body: any, options: RequestInit = {}) =>
+        apiFetch(endpoint, { ...options, method: 'PATCH', body: JSON.stringify(body) }),
+
+    delete: (endpoint: string, options: RequestInit = {}) =>
+        apiFetch(endpoint, { ...options, method: 'DELETE' }),
+
     getCategories: () => apiFetch('/places/categories/').then(res => res.json()),
     getPlaces: (params?: string) => apiFetch(`/places/places/${params ? `?${params}` : ''}`).then(res => res.json()),
     getPlace: (slug: string) => apiFetch(`/places/places/${slug}/`).then(res => res.json()),
