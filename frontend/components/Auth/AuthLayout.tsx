@@ -37,7 +37,7 @@ export default function AuthLayout({ children, title, description, mode }: AuthL
                         <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg transition-transform group-hover:scale-105">
                             <Image src="/logo.png" alt="Logo" width={24} height={24} />
                         </div>
-                        <span className="text-white font-bold text-xl drop-shadow-md">Kuwait Tourism</span>
+                        <span className="text-white font-bold text-xl drop-shadow-md">{t.nav.brand_name}</span>
                     </Link>
 
                     <div className="max-w-md">
@@ -63,7 +63,7 @@ export default function AuthLayout({ children, title, description, mode }: AuthL
                             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
                                 <Image src="/logo.png" alt="Logo" width={24} height={24} className="brightness-0 invert" />
                             </div>
-                            <span className="text-foreground font-bold text-xl">Kuwait Tourism</span>
+                            <span className="text-foreground font-bold text-xl">{t.nav.brand_name}</span>
                         </Link>
                     </div>
 

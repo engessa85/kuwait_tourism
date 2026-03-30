@@ -25,7 +25,7 @@ export default function SignupForm() {
         setError('');
 
         if (password !== confirmPassword) {
-            setError(t.language === 'en' ? 'Passwords do not match.' : 'كلمات المرور غير متطابقة.');
+            setError(t.auth.signup.error_passwords_mismatch);
             return;
         }
 
@@ -35,7 +35,7 @@ export default function SignupForm() {
         if (success) {
             router.push('/');
         } else {
-            setError(t.language === 'en' ? 'Signup failed. Email might already be in use.' : 'فشل التسجيل. قد يكون البريد الإلكتروني مستخدماً بالفعل.');
+            setError(t.auth.signup.error_signup_failed);
             setIsSubmitting(false);
         }
     };
@@ -143,7 +143,7 @@ export default function SignupForm() {
                         ) : (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268-2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         )}
                     </button>
@@ -157,7 +157,7 @@ export default function SignupForm() {
                 disabled={isSubmitting}
                 className="w-full py-3.5 px-4 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
             >
-                {isSubmitting ? (t.language === 'en' ? 'Creating account...' : 'جاري إنشاء الحساب...') : t.auth.signup.submit}
+                {isSubmitting ? t.auth.signup.creating_account : t.auth.signup.submit}
             </button>
 
             <p className="text-center text-sm text-gray-600 mt-6">

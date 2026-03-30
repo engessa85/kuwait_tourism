@@ -1,5 +1,6 @@
 {
     "nav": {
+        "brand_name": "Kuwait Tourism",
         "home": "Home",
         "categories": "Categories",
         "experiences": "Experiences",
@@ -187,6 +188,8 @@
             "password_label": "Password",
             "password_placeholder": "••••••••",
             "submit": "Sign In",
+            "signing_in": "Signing in...",
+            "error_invalid": "Invalid email or password.",
             "no_account": "Don't have an account?",
             "signup_link": "Sign up for free"
         },
@@ -202,6 +205,9 @@
             "confirm_password_label": "Confirm Password",
             "confirm_password_placeholder": "••••••••",
             "submit": "Create Account",
+            "creating_account": "Creating account...",
+            "error_passwords_mismatch": "Passwords do not match.",
+            "error_signup_failed": "Signup failed. Email might already be in use.",
             "has_account": "Already have an account?",
             "login_link": "Sign in"
         }

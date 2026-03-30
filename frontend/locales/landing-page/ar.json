@@ -1,5 +1,6 @@
 {
     "nav": {
+        "brand_name": "سياحة الكويت",
         "home": "الرئيسية",
         "categories": "التصنيفات",
         "experiences": "تجاربنا",
@@ -187,6 +188,8 @@
             "password_label": "كلمة المرور",
             "password_placeholder": "••••••••",
             "submit": "تسجيل الدخول",
+            "signing_in": "جاري الدخول...",
+            "error_invalid": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
             "no_account": "ليس لديك حساب؟",
             "signup_link": "سجل مجاناً"
         },
@@ -202,6 +205,9 @@
             "confirm_password_label": "تأكيد كلمة المرور",
             "confirm_password_placeholder": "••••••••",
             "submit": "إنشاء حساب",
+            "creating_account": "جاري إنشاء الحساب...",
+            "error_passwords_mismatch": "كلمات المرور غير متطابقة.",
+            "error_signup_failed": "فشل التسجيل. قد يكون البريد الإلكتروني مستخدماً بالفعل.",
             "has_account": "لديك حساب بالفعل؟",
             "login_link": "تسجيل دخول"
         }
