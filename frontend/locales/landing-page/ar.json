@@ -209,6 +209,9 @@
     "profile": {
         "sidebar": {
             "dashboard": "لوحة التحكم",
+            "profile": "الملف الشخصي",
+            "favorites": "المفضلة",
+            "reviews": "التقييمات",
             "saved_attractions": "المعالم المحفوظة",
             "settings": "الإعدادات",
             "signout": "تسجيل الخروج",
@@ -222,15 +225,26 @@
                 "upcoming_trips": "الرحلات القادمة",
                 "places_visited": "الأماكن التي تمت زيارتها",
                 "saved_places": "الأماكن المحفوظة",
+                "total_reviews": "إجمالي التقييمات",
                 "reviews_posted": "التقييمات المنشورة"
             },
             "saved_attractions": {
                 "title": "المعالم المحفوظة",
-                "view_details": "التفاصيل"
+                "view_details": "التفاصيل",
+                "no_favorites": "لا توجد مفضلات بعد",
+                "explore_btn": "استكشف المعالم"
             },
-            "recent_reviews": {
-                "title": "تقييماتك الأخيرة",
-                "view_all": "عرض جميع التقييمات الـ {{count}}"
+            "reviews": {
+                "title": "تقييماتي",
+                "no_reviews": "لم تقم بكتابة أي تقييمات بعد.",
+                "edit": "تعديل",
+                "delete": "حذف"
+            },
+            "settings": {
+                "title": "الإعدادات",
+                "language": "لغة التطبيق",
+                "danger_zone": "منطقة الخطر",
+                "delete_account": "حذف الحساب نهائياً"
             }
         }
     }

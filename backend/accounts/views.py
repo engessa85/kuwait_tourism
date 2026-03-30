@@ -14,7 +14,7 @@ class SignupView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = SignupSerializer
 
-class MeView(generics.RetrieveAPIView):
+class MeView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
 

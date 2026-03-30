@@ -56,3 +56,15 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.place.title_en} by {self.user}"
+
+class Favorite(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='favorites', on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, related_name='favorited_by', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'place')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.email} - {self.place.title_en}"

@@ -209,6 +209,9 @@
     "profile": {
         "sidebar": {
             "dashboard": "Dashboard",
+            "profile": "Profile",
+            "favorites": "Favorites",
+            "reviews": "Reviews",
             "saved_attractions": "Saved Attractions",
             "settings": "Settings",
             "signout": "Signout",
@@ -222,15 +225,26 @@
                 "upcoming_trips": "Upcoming Trips",
                 "places_visited": "Places Visited",
                 "saved_places": "Saved Places",
+                "total_reviews": "Total Reviews",
                 "reviews_posted": "Reviews Posted"
             },
             "saved_attractions": {
                 "title": "Saved Attractions",
-                "view_details": "DETAILS"
+                "view_details": "DETAILS",
+                "no_favorites": "No favorites yet",
+                "explore_btn": "Explore Attractions"
             },
-            "recent_reviews": {
-                "title": "Your Recent Reviews",
-                "view_all": "View all {{count}} reviews"
+            "reviews": {
+                "title": "My Reviews",
+                "no_reviews": "You haven't written any reviews yet.",
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "settings": {
+                "title": "Settings",
+                "language": "Application Language",
+                "danger_zone": "Danger Zone",
+                "delete_account": "Delete Account Permanently"
             }
         }
     }

@@ -1,11 +1,33 @@
 from rest_framework import serializers
-from .models import Category, Place, Review
+from .models import Category, Place, Review, Favorite
 from django.db.models import Avg
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    place_details = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Favorite
+        fields = ['id', 'place', 'place_details', 'created_at']
+        read_only_fields = ['id', 'created_at']
+
+    def get_place_details(self, obj):
+        return {
+            'id': obj.place.id,
+            'title_en': obj.place.title_en,
+            'title_ar': obj.place.title_ar,
+            'slug': obj.place.slug,
+            'image1': obj.place.image1.url if obj.place.image1 else None,
+            'category_name_en': obj.place.category.name_en,
+            'category_name_ar': obj.place.category.name_ar,
+            'price': obj.place.price,
+            'latitude': obj.place.latitude,
+            'longitude': obj.place.longitude,
+        }
 
 class ReviewSerializer(serializers.ModelSerializer):
     user_full_name = serializers.ReadOnlyField(source='user.full_name')

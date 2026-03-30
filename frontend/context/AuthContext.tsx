@@ -7,6 +7,11 @@ interface User {
     id: number;
     email: string;
     full_name: string;
+    profile_picture: string | null;
+    language_preference: 'en' | 'ar';
+    date_joined: string;
+    reviews_count: number;
+    favorites_count: number;
 }
 
 interface AuthContextType {
@@ -15,6 +20,7 @@ interface AuthContextType {
     login: (email: string, password: string) => Promise<boolean>;
     signup: (full_name: string, email: string, password: string, confirm_password: string) => Promise<boolean>;
     logout: () => void;
+    updateProfile: (data: FormData) => Promise<boolean>;
     loading: boolean;
 }
 
@@ -86,8 +92,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUser(null);
     };
 
+    const updateProfile = async (formData: FormData) => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const res = await fetch('http://localhost:8000/api/accounts/me/', {
+                method: 'PATCH',
+                headers: {
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+                },
+                body: formData
+            });
+            
+            if (res.ok) {
+                const userData = await res.json();
+                setUser(userData);
+                return true;
+            }
+        } catch (error) {
+            console.error("Profile update failed:", error);
+        }
+        return false;
+    };
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, signup, logout, loading }}>
+        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, signup, logout, updateProfile, loading }}>
             {children}
         </AuthContext.Provider>
     );

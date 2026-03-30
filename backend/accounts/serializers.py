@@ -12,10 +12,22 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return super().validate(attrs)
 
 class UserSerializer(serializers.ModelSerializer):
+    reviews_count = serializers.SerializerMethodField()
+    favorites_count = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'full_name', 'date_joined')
-        read_only_fields = ('id', 'date_joined')
+        fields = (
+            'id', 'email', 'full_name', 'profile_picture', 
+            'language_preference', 'date_joined', 'reviews_count', 'favorites_count'
+        )
+        read_only_fields = ('id', 'date_joined', 'reviews_count', 'favorites_count')
+
+    def get_reviews_count(self, obj):
+        return obj.review_set.count()
+
+    def get_favorites_count(self, obj):
+        return obj.favorites.count()
 
 class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8)
