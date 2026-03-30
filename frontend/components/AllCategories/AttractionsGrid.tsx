@@ -33,12 +33,12 @@ const AttractionsGrid: React.FC<AttractionsGridProps> = ({ activeCategory }) => 
                 ))}
             </div>
 
-            <div className="mt-16 flex justify-center">
+            {/* <div className="mt-16 flex justify-center">
                 <button className="px-8 py-3.5 rounded-full border border-gray-200 text-gray-900 font-bold hover:bg-gray-50 transition-all flex items-center gap-2 group">
                     {t.categories.page.load_more}
                     <span className="transition-transform group-hover:translate-y-0.5">▼</span>
                 </button>
-            </div>
+            </div> */}
         </section>
     );
 };
