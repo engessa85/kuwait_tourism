@@ -8,6 +8,7 @@ export const usePlaces = (params?: string) => {
 
     useEffect(() => {
         const fetchPlaces = async () => {
+            setLoading(true);
             try {
                 const data = await api.getPlaces(params);
                 setPlaces(data);
