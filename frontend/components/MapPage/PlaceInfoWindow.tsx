@@ -85,14 +85,6 @@ export default function PlaceInfoWindow({ place, onClose }: PlaceInfoWindowProps
                 <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
                     {place.description}
                 </p>
-
-                {/* Action Buttons */}
-                <div className="flex">
-                    <button className="flex-1 bg-[#1a4eff] hover:bg-[#163fcc] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-                        Get Directions
-                    </button>
-                </div>
             </div>
         </div>
     );

@@ -1,20 +1,42 @@
 'use client';
 
-import React, { useState } from 'react';
-import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import React, { useEffect } from 'react';
+import { APIProvider, Map, AdvancedMarker, Pin, useMap } from '@vis.gl/react-google-maps';
 import PlaceInfoWindow from './PlaceInfoWindow';
 
+interface MapPlace {
+    id: string;
+    position: { lat: number; lng: number };
+    [key: string]: unknown;
+}
+
 interface InteractiveMapProps {
-    places: any[];
+    places: MapPlace[];
     activePlaceId: string | null;
     onPlaceSelect: (id: string | null) => void;
 }
 
+function MapFocusController({
+    activePlace,
+}: {
+    activePlace?: { position: { lat: number; lng: number } };
+}) {
+    const map = useMap();
+
+    useEffect(() => {
+        if (!map || !activePlace?.position) return;
+
+        map.panTo(activePlace.position);
+        map.setZoom(15);
+    }, [map, activePlace]);
+
+    return null;
+}
+
 export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }: InteractiveMapProps) {
-    const defaultCenter = { lat: 29.35, lng: 47.98 }; // General Kuwait bounds
+    const defaultCenter = { lat: 29.35, lng: 47.98 };
     const activePlace = places.find(p => p.id === activePlaceId);
 
-    // Map center prioritizing active place if set
     const center = activePlace ? activePlace.position : defaultCenter;
 
     const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || '';
@@ -39,15 +61,17 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
             <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
                 <Map
                     defaultZoom={11}
+                    defaultCenter={defaultCenter}
                     center={center}
                     gestureHandling={'greedy'}
                     disableDefaultUI={true}
                     className="w-full h-full"
                     mapId={GOOGLE_MAPS_MAP_ID}
                 >
+                    <MapFocusController activePlace={activePlace} />
+
                     {/* Render Markers */}
                     {places.map(place => {
-                        // Skip rendering if position is invalid
                         if (!place.position || isNaN(place.position.lat) || isNaN(place.position.lng)) {
                             return null;
                         }
@@ -68,12 +92,9 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                         );
                     })}
 
-                    {/* Render InfoWindow directly without Google Maps InfoWindow component for exact UI overlay positioning relative to right side layout or center overlay? 
-                    The design shows the InfoWindow as a floating card overlay right on the map, near the bottom right. We will render it as a standard absolute positioned div inside the map container instead of a true InfoWindow which follows the pin, as it matches the design better for a fixed info panel or we can use generic CSS placing since the image shows a large card covering the bottom right map area. Let's place it absolutely for now. */}
                 </Map>
             </APIProvider>
 
-            {/* Custom Info Window Overlay (Positioned bottom right on map area, left of controls) */}
             {activePlace && (
                 <div className="absolute bottom-6 right-20 z-10 animate-fade-in-up">
                     <PlaceInfoWindow
@@ -83,7 +104,6 @@ export default function InteractiveMap({ places, activePlaceId, onPlaceSelect }:
                 </div>
             )}
 
-            {/* Map Controls (Positioned bottom right) */}
             <div className="absolute right-6 bottom-6 flex flex-col gap-2 z-10">
                 <div className="bg-white rounded-xl shadow-lg flex flex-col overflow-hidden">
                     <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition-colors border-b border-gray-100">
