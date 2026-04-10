@@ -39,6 +39,9 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class PlaceSerializer(serializers.ModelSerializer):
     category_name = serializers.ReadOnlyField(source='category.name_en')
+    category_name_en = serializers.ReadOnlyField(source='category.name_en')
+    category_name_ar = serializers.ReadOnlyField(source='category.name_ar')
+    category_slug = serializers.ReadOnlyField(source='category.slug')
     reviews = ReviewSerializer(many=True, read_only=True)
     average_rating = serializers.SerializerMethodField()
     is_favorite = serializers.SerializerMethodField()
@@ -46,7 +49,7 @@ class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
         fields = [
-            'id', 'category', 'category_name', 'title_en', 'title_ar', 
+            'id', 'category', 'category_name', 'category_name_en', 'category_name_ar', 'category_slug', 'title_en', 'title_ar', 
             'subtitle_en', 'subtitle_ar', 'description_en', 'description_ar', 
             'image1', 'image2', 'image3', 'image4', 'price',
             'latitude', 'longitude', 'slug', 'average_rating', 'reviews', 'is_favorite'

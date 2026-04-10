@@ -1,6 +1,7 @@
 # Kuwait Tourism App
 
 A modern web application designed to promote tourism in Kuwait.
+This project is for tourism in Kuwait.
 
 ## Tech Stack
 

@@ -2,17 +2,26 @@
 
 import React from 'react';
 import PlaceCard from './PlaceCard';
-import { CATEGORIES } from './mockData';
+
+interface CategoryOption {
+    id: string;
+    label: string;
+}
+
+interface SidebarPlace {
+    id: string;
+    [key: string]: unknown;
+}
 
 interface SidebarProps {
-    places: any[];
+    places: SidebarPlace[];
     activePlaceId: string | null;
     onPlaceSelect: (id: string) => void;
     searchQuery: string;
     onSearchChange: (query: string) => void;
     activeCategory: string;
     onCategoryChange: (category: string) => void;
-    categories?: string[];
+    categories?: CategoryOption[];
 }
 
 export default function Sidebar({
@@ -25,7 +34,9 @@ export default function Sidebar({
     onCategoryChange,
     categories = []
 }: SidebarProps) {
-    const displayCategories = categories.length > 0 ? categories : ['All', 'Historical', 'Shopping', 'Dining', 'Nature'];
+    const displayCategories = categories.length > 0
+        ? categories
+        : [{ id: 'all', label: 'All' }];
     return (
         <div className="w-[380px] bg-white h-full border-r border-gray-100 flex flex-col shadow-sm z-10 shrink-0">
             {/* Header: Search and Categories */}
@@ -59,19 +70,17 @@ export default function Sidebar({
 
                 {/* Categories */}
                 <div className="flex gap-2 mb-2 overflow-x-auto pb-2 scrollbar-none">
-                    {displayCategories.map((cat, idx) => (
+                    {displayCategories.map((category) => (
                         <button
-                            key={cat}
-                            onClick={() => onCategoryChange(cat)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap shadow-sm transition-colors ${activeCategory === cat
+                            key={category.id}
+                            onClick={() => onCategoryChange(category.id)}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap shadow-sm transition-colors ${activeCategory === category.id
                                 ? 'bg-gray-900 text-white'
                                 : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
                                 }`}
                         >
-                            {cat === 'All' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>}
-                            {cat === 'Historical' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>}
-                            {cat === 'Shopping' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>}
-                            {cat}
+                            {category.id === 'all' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>}
+                            {category.label}
                         </button>
                     ))}
                 </div>

@@ -4,44 +4,72 @@ import React, { useState } from 'react';
 import Sidebar from '../../components/MapPage/Sidebar';
 import InteractiveMap from '../../components/MapPage/InteractiveMap';
 import Header from '../../components/Common/Header';
-import { LanguageProvider } from '../../context/LanguageContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCategories, usePlaces } from '@/hooks/useApi';
 
+const API_BASE_URL = 'http://localhost:8000';
+
+const getImageUrl = (imagePath?: string | null) => {
+    if (!imagePath) return '/placeholder.png';
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath;
+    }
+    return `${API_BASE_URL}${imagePath}`;
+};
+
 export default function MapPage() {
-    const { language, t } = useLanguage();
+    const { language } = useLanguage();
     const [activePlaceId, setActivePlaceId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
-    const [activeCategory, setActiveCategory] = useState('All');
+    const [activeCategory, setActiveCategory] = useState('all');
 
     const { categories, loading: catLoading } = useCategories();
     const { places, loading: placesLoading } = usePlaces();
 
     if (catLoading || placesLoading) return <div className="h-screen flex items-center justify-center">Loading map...</div>;
 
-    const dynamicCategories = ['All', ...categories.map(c => language === 'en' ? c.name_en : c.name_ar)];
+    const dynamicCategories = [
+        { id: 'all', label: 'All' },
+        ...categories.map((category) => ({
+            id: category.slug,
+            label: language === 'en' ? category.name_en : category.name_ar,
+        })),
+    ];
 
-    const validPlaces = places.filter(p => p.latitude && p.longitude);
+    const validPlaces = places.filter((place) => {
+        const lat = Number(place.latitude);
+        const lng = Number(place.longitude);
+        return Number.isFinite(lat) && Number.isFinite(lng);
+    });
 
-    const mappedPlaces = validPlaces.map(p => ({
-        id: p.slug,
-        title: language === 'en' ? p.title_en : p.title_ar,
-        category: p.category_name,
+    const mappedPlaces = validPlaces.map((place) => ({
+        id: place.slug,
+        title: language === 'en' ? place.title_en : place.title_ar,
+        category: language === 'en'
+            ? (place.category_name_en || place.category_name)
+            : (place.category_name_ar || place.category_name),
+        categorySlug: place.category_slug || String(place.category),
         distance: '', // Calculated dynamic if needed
-        rating: p.average_rating || 0,
-        reviewsCount: `${p.reviews?.length || 0}`,
-        image: p.image1 || '/placeholder.png',
-        location: language === 'en' ? p.subtitle_en : p.subtitle_ar,
-        description: language === 'en' ? p.description_en : p.description_ar,
+        rating: place.average_rating || 0,
+        reviewsCount: `${place.reviews?.length || 0}`,
+        image: getImageUrl(place.image1),
+        location: language === 'en'
+            ? (place.subtitle_en || '')
+            : (place.subtitle_ar || ''),
+        description: language === 'en'
+            ? (place.description_en || '')
+            : (place.description_ar || ''),
         isOpen: true,
         closingTime: '',
-        position: { lat: parseFloat(p.latitude as string), lng: parseFloat(p.longitude as string) }
+        position: { lat: Number(place.latitude), lng: Number(place.longitude) }
     }));
 
     const filteredPlaces = mappedPlaces.filter(place => {
+        const normalizedQuery = searchQuery.toLowerCase();
         const matchesSearch = place.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            place.category.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = activeCategory === 'All' || place.category === activeCategory;
+            place.category.toLowerCase().includes(normalizedQuery) ||
+            place.location.toLowerCase().includes(normalizedQuery);
+        const matchesCategory = activeCategory === 'all' || place.categorySlug === activeCategory;
         return matchesSearch && matchesCategory;
     });
 

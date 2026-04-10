@@ -1,8 +1,20 @@
 import { useState, useEffect } from 'react';
 import { api } from '@/utils/api';
 
+type ApiCollection<T> = T[] | { results?: T[] } | null | undefined;
+
+type ApiError = {
+    message?: string;
+};
+
+const normalizeCollection = <T,>(data: ApiCollection<T>): T[] => {
+    if (Array.isArray(data)) return data;
+    if (Array.isArray(data?.results)) return data.results;
+    return [];
+};
+
 export const usePlaces = (params?: string) => {
-    const [places, setPlaces] = useState<any[]>([]);
+    const [places, setPlaces] = useState<unknown[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -11,9 +23,9 @@ export const usePlaces = (params?: string) => {
             setLoading(true);
             try {
                 const data = await api.getPlaces(params);
-                setPlaces(data);
-            } catch (err: any) {
-                setError(err.message);
+                setPlaces(normalizeCollection(data));
+            } catch (err: unknown) {
+                setError((err as ApiError).message || 'Failed to load places');
             } finally {
                 setLoading(false);
             }
@@ -26,7 +38,7 @@ export const usePlaces = (params?: string) => {
 };
 
 export const useCategories = () => {
-    const [categories, setCategories] = useState<any[]>([]);
+    const [categories, setCategories] = useState<unknown[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -34,9 +46,9 @@ export const useCategories = () => {
         const fetchCategories = async () => {
             try {
                 const data = await api.getCategories();
-                setCategories(data);
-            } catch (err: any) {
-                setError(err.message);
+                setCategories(normalizeCollection(data));
+            } catch (err: unknown) {
+                setError((err as ApiError).message || 'Failed to load categories');
             } finally {
                 setLoading(false);
             }
@@ -49,7 +61,7 @@ export const useCategories = () => {
 };
 
 export const usePlace = (slug: string) => {
-    const [place, setPlace] = useState<any>(null);
+    const [place, setPlace] = useState<unknown>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -60,8 +72,8 @@ export const usePlace = (slug: string) => {
             try {
                 const data = await api.getPlace(slug);
                 setPlace(data);
-            } catch (err: any) {
-                setError(err.message);
+            } catch (err: unknown) {
+                setError((err as ApiError).message || 'Failed to load place');
             } finally {
                 setLoading(false);
             }
