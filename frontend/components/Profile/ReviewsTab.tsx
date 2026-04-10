@@ -1,14 +1,24 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { api } from '@/utils/api';
 import { useLanguage } from '@/context/LanguageContext';
 
+interface ReviewItem {
+    id: number;
+    place: number;
+    place_slug: string;
+    place_title_en: string;
+    place_title_ar: string;
+    rating: number;
+    comment: string;
+    created_at: string;
+}
+
 export default function ReviewsTab() {
     const { language, t } = useLanguage();
-    const [reviews, setReviews] = useState<any[]>([]);
+    const [reviews, setReviews] = useState<ReviewItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editComment, setEditComment] = useState('');
@@ -16,16 +26,9 @@ export default function ReviewsTab() {
 
     const fetchReviews = async () => {
         try {
-            // Need a way to filter reviews by user. 
-            // In ReviewViewSet, get_queryset already filters by authenticated user if it's not a list for all?
-            // Wait, ReviewViewSet list is AllowAny. Filter is needed.
-            // Let's assume for now we have a ReviewViewSet that can filter by user or we add an endpoint.
-            // Actually, we can just fetch all and filter client side if small, but let's assume we can filter.
             const res = await api.get('/places/reviews/?user_me=true'); 
             if (res.ok) {
                 const data = await res.json();
-                // Filter client side as fallback if user_me doesn't work yet
-                // setReviews(data.filter((r:any) => r.user === user.id)); 
                 setReviews(data);
             }
         } catch (error) {
@@ -80,7 +83,18 @@ export default function ReviewsTab() {
                         <div key={review.id} className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm relative group">
                             <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <h4 className="font-bold text-gray-900">{review.place_title}</h4>
+                                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-2">
+                                        Reviewed Place
+                                    </p>
+                                    <Link
+                                        href={`/attractions/${review.place_slug}`}
+                                        className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-primary transition-colors"
+                                    >
+                                        <span>{language === 'en' ? review.place_title_en : review.place_title_ar}</span>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </Link>
                                     <div className="flex items-center gap-1 text-yellow-500 text-sm mt-1">
                                         {[...Array(5)].map((_, i) => (
                                             <span key={i}>{i < review.rating ? '★' : '☆'}</span>
@@ -146,7 +160,7 @@ export default function ReviewsTab() {
                                 </div>
                             ) : (
                                 <p className="text-gray-600 text-sm italic leading-relaxed">
-                                    "{review.comment}"
+                                    &quot;{review.comment}&quot;
                                 </p>
                             )}
                             <p className="text-[10px] text-gray-400 mt-4">{new Date(review.created_at).toLocaleDateString()}</p>

@@ -32,10 +32,24 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     user_full_name = serializers.ReadOnlyField(source='user.full_name')
+    place_slug = serializers.ReadOnlyField(source='place.slug')
+    place_title_en = serializers.ReadOnlyField(source='place.title_en')
+    place_title_ar = serializers.ReadOnlyField(source='place.title_ar')
 
     class Meta:
         model = Review
-        fields = ['id', 'place', 'user', 'user_full_name', 'rating', 'comment', 'created_at']
+        fields = [
+            'id',
+            'place',
+            'place_slug',
+            'place_title_en',
+            'place_title_ar',
+            'user',
+            'user_full_name',
+            'rating',
+            'comment',
+            'created_at'
+        ]
         read_only_fields = ['user']
 
 class PlaceSerializer(serializers.ModelSerializer):
