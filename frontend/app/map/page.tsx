@@ -86,8 +86,9 @@ export default function MapPage() {
                 description: language === 'en'
                     ? (place.description_en || '')
                     : (place.description_ar || ''),
+                price: place.price || '',
                 isOpen: true,
-                closingTime: '',
+                openingHours: place.opening_hours || '',
                 position,
             };
         })

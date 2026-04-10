@@ -29,6 +29,7 @@ class Place(models.Model):
     description_en = models.TextField()
     description_ar = models.TextField()
     price = models.CharField(max_length=50, default='KD 0.000')
+    opening_hours = models.CharField(max_length=100, blank=True, default='')
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     image1 = models.ImageField(upload_to='places/', blank=True, null=True)

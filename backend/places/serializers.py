@@ -25,6 +25,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
             'category_name_en': obj.place.category.name_en,
             'category_name_ar': obj.place.category.name_ar,
             'price': obj.place.price,
+            'opening_hours': obj.place.opening_hours,
             'latitude': obj.place.latitude,
             'longitude': obj.place.longitude,
         }
@@ -51,7 +52,7 @@ class PlaceSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'category', 'category_name', 'category_name_en', 'category_name_ar', 'category_slug', 'title_en', 'title_ar', 
             'subtitle_en', 'subtitle_ar', 'description_en', 'description_ar', 
-            'image1', 'image2', 'image3', 'image4', 'price',
+            'image1', 'image2', 'image3', 'image4', 'price', 'opening_hours',
             'latitude', 'longitude', 'slug', 'average_rating', 'reviews', 'is_favorite'
         ]
 
