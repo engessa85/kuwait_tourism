@@ -16,6 +16,10 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DEBUG', '0').lower() in {'1', 'true', 'yes', 'on'}
 
+
+def env_flag(name: str, default: str = '0') -> bool:
+    return os.environ.get(name, default).lower() in {'1', 'true', 'yes', 'on'}
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
@@ -92,6 +96,9 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = env_flag('SECURE_SSL_REDIRECT')
+SESSION_COOKIE_SECURE = env_flag('SESSION_COOKIE_SECURE')
+CSRF_COOKIE_SECURE = env_flag('CSRF_COOKIE_SECURE')
 
 TEMPLATES = [
     {

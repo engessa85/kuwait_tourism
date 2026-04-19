@@ -48,10 +48,12 @@ services:
     depends_on:
       - frontend
       - backend
+    entrypoint: ["/bin/sh", "/opt/start-local.sh"]
     ports:
       - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/default.local.conf:/etc/nginx/templates/default.local.conf:ro
+      - ./nginx/start-local.sh:/opt/start-local.sh:ro
       - django_media:/var/www/media:ro
       - django_static:/var/www/static:ro
 
