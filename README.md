@@ -21,15 +21,15 @@ This project is for tourism in Kuwait.
 
 ## Docker Deployment
 
-This project now uses two Docker compose layers:
+This project now uses two Docker compose files:
 
-- `docker-compose.yml`: local/default stack over HTTP
-- `docker-compose.prod.yml`: VPS/production overrides with HTTPS support
+- `docker-compose.yml`: local/dev stack over HTTP with hot reload
+- `docker-compose.prod.yml`: VPS/production stack with HTTPS support
 
 Shared behavior:
 
-- `frontend` runs the production Next.js server internally on port `3000`
-- `backend` runs Django with `gunicorn` internally on port `8000`
+- `frontend` runs on port `3000` internally
+- `backend` runs on port `8000` internally
 - `nginx` proxies `/` to the frontend and `/api/` plus `/admin/` to the backend
 - `nginx` also serves `/media/` and `/static/`
 - SQLite data is stored on a Docker volume so it survives container recreation
@@ -62,6 +62,12 @@ Start the local stack:
 docker compose up --build -d
 ```
 
+Local changes reload automatically because:
+
+- Django runs with `runserver`
+- Next.js runs with `npm run dev`
+- `frontend/` and `backend/` are mounted into the containers
+
 ### Production
 
 For the VPS, use a root `.env` like this:
@@ -85,13 +91,13 @@ NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=your_map_id_here
 Bring up the VPS stack:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+docker compose -f docker-compose.prod.yml up --build -d
 ```
 
 Issue the initial Let's Encrypt certificate after DNS for `kuwaittourism.online` and `www.kuwaittourism.online` points to the VPS:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm certbot \
+docker compose -f docker-compose.prod.yml run --rm certbot-init \
   certonly --webroot -w /var/www/certbot \
   -d kuwaittourism.online -d www.kuwaittourism.online \
   --email you@example.com --agree-tos --no-eff-email
@@ -100,7 +106,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm certbot
 Then restart nginx so it switches from the bootstrap HTTP config to the HTTPS config:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml restart nginx
+docker compose -f docker-compose.prod.yml restart nginx
 ```
 
 After that:

@@ -1,22 +1,59 @@
 services:
   backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kuwait_tourism_backend
     environment:
       DEBUG: ${DEBUG:-0}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-change-me-in-production}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-kuwaittourism.online,www.kuwaittourism.online,72.61.84.66}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://kuwaittourism.online,https://www.kuwaittourism.online}
       CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-https://kuwaittourism.online,https://www.kuwaittourism.online}
       SECURE_SSL_REDIRECT: ${SECURE_SSL_REDIRECT:-1}
       SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-1}
       CSRF_COOKIE_SECURE: ${CSRF_COOKIE_SECURE:-1}
+      SQLITE_PATH: /app/data/db.sqlite3
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-admin@admin.com}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-admin}
+      DJANGO_SUPERUSER_FULL_NAME: ${DJANGO_SUPERUSER_FULL_NAME:-Admin User}
+    expose:
+      - "8000"
+    volumes:
+      - django_db:/app/data
+      - django_media:/app/media
+      - django_static:/app/staticfiles
 
   frontend:
     build:
+      context: ./frontend
+      dockerfile: Dockerfile
       args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api}
+        NEXT_PUBLIC_MEDIA_BASE_URL: ${NEXT_PUBLIC_MEDIA_BASE_URL:-}
+        NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:-}
+        NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID: ${NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID:-}
         NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://kuwaittourism.online}
+    container_name: kuwait_tourism_frontend
     environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api}
+      NEXT_PUBLIC_MEDIA_BASE_URL: ${NEXT_PUBLIC_MEDIA_BASE_URL:-}
+      NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:-}
+      NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID: ${NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID:-}
       NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://kuwaittourism.online}
+    depends_on:
+      - backend
+    expose:
+      - "3000"
 
   nginx:
+    image: nginx:1.27-alpine
+    container_name: kuwait_tourism_nginx
+    depends_on:
+      - frontend
+      - backend
+    entrypoint: ["/bin/sh", "/opt/select-config.sh"]
     ports:
       - "80:80"
       - "443:443"
@@ -28,7 +65,6 @@ services:
       - django_static:/var/www/static:ro
       - certbot_www:/var/www/certbot
       - letsencrypt:/etc/letsencrypt
-    entrypoint: ["/bin/sh", "/opt/select-config.sh"]
 
   certbot:
     image: certbot/certbot:latest
@@ -39,6 +75,15 @@ services:
     entrypoint: /bin/sh
     command: -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $$!; done"
 
+  certbot-init:
+    image: certbot/certbot:latest
+    volumes:
+      - certbot_www:/var/www/certbot
+      - letsencrypt:/etc/letsencrypt
+
 volumes:
+  django_db:
+  django_media:
+  django_static:
   certbot_www:
   letsencrypt:
