@@ -6,18 +6,14 @@ import InteractiveMap from '../../components/MapPage/InteractiveMap';
 import Header from '../../components/Common/Header';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCategories, usePlaces } from '@/hooks/useApi';
-
-const API_BASE_URL = 'http://localhost:8000';
+import { buildMediaUrl } from '@/utils/urls';
 
 const KUWAIT_LAT_RANGE = { min: 28, max: 31 };
 const KUWAIT_LNG_RANGE = { min: 46, max: 49.5 };
 
 const getImageUrl = (imagePath?: string | null) => {
     if (!imagePath) return '/placeholder.png';
-    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-        return imagePath;
-    }
-    return `${API_BASE_URL}${imagePath}`;
+    return buildMediaUrl(imagePath);
 };
 
 const isWithinKuwaitBounds = (lat: number, lng: number) =>
@@ -43,6 +39,26 @@ const normalizePosition = (latitude: unknown, longitude: unknown) => {
     }
 
     return { lat, lng };
+};
+
+type MapPlace = {
+    id: string;
+    title: string;
+    category: string;
+    categorySlug: string;
+    distance: string;
+    rating: number;
+    reviewsCount: string;
+    image: string;
+    location: string;
+    description: string;
+    price: string;
+    isOpen: boolean;
+    openingHours: string;
+    position: {
+        lat: number;
+        lng: number;
+    };
 };
 
 export default function MapPage() {
@@ -92,7 +108,7 @@ export default function MapPage() {
                 position,
             };
         })
-        .filter(Boolean);
+        .filter((place): place is MapPlace => place !== null);
 
     const filteredPlaces = mappedPlaces.filter(place => {
         const normalizedQuery = searchQuery.toLowerCase();

@@ -6,8 +6,18 @@ import PlaceInfoWindow from './PlaceInfoWindow';
 
 interface MapPlace {
     id: string;
+    title: string;
+    category: string;
+    distance: string;
+    rating: number;
+    reviewsCount: string;
+    image: string;
+    location: string;
+    description: string;
+    price: string;
+    isOpen: boolean;
+    openingHours: string;
     position: { lat: number; lng: number };
-    [key: string]: unknown;
 }
 
 interface InteractiveMapProps {

@@ -23,7 +23,7 @@ const AttractionsGrid: React.FC<AttractionsGridProps> = ({ activeCategory }) => 
                         key={idx}
                         id={place.slug}
                         title={language === 'en' ? place.title_en : place.title_ar}
-                        category={place.category_name}
+                        category={place.category_name || place.category_name_en || place.category_name_ar || 'Attraction'}
                         location={language === 'en' ? place.subtitle_en : place.subtitle_ar}
                         rating={place.average_rating || 0}
                         description={language === 'en' ? place.description_en : place.description_ar}

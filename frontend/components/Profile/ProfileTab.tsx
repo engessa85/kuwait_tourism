@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { buildMediaUrl } from '@/utils/urls';
 
 export default function ProfileTab() {
     const { user, updateProfile } = useAuth();
@@ -58,7 +59,7 @@ export default function ProfileTab() {
                     <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-sm">
                         {user?.profile_picture ? (
                             <Image 
-                                src={`http://localhost:8000${user.profile_picture}`} 
+                                src={buildMediaUrl(user.profile_picture)} 
                                 alt={user.full_name} 
                                 fill 
                                 className="object-cover"

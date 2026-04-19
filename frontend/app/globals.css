@@ -7,6 +7,8 @@
   --accent: #FBBF24;
   --text-muted: #4B5563;
   --bg-light: #F9FAFB;
+  --font-sans-stack: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono-stack: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", monospace;
 }
 
 @theme inline {
@@ -16,8 +18,8 @@
   --color-accent: var(--accent);
   --color-text-muted: var(--text-muted);
   --color-bg-light: var(--bg-light);
-  --font-sans: var(--font-outfit), var(--font-geist-sans), ui-sans-serif, system-ui;
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,7 +32,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans-stack);
 }
 
 /* Map Styling for "Google Maps" minimalist look */

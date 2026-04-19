@@ -39,13 +39,13 @@ const Experiences = () => {
                                     />
                                 </Link>
                                 <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-gray-900 shadow-sm border border-gray-100">
-                                    <span className="rtl:hidden">From </span><span className="text-primary">{place.price}</span><span className="hidden rtl:inline"> تبدأ من</span>
+                                    <span className="rtl:hidden">From </span><span className="text-primary">{place.price || 'KD 0.000'}</span><span className="hidden rtl:inline"> تبدأ من</span>
                                 </div>
                             </div>
                             <div className="p-6 flex flex-col grow text-left rtl:text-right">
                                 <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 flex items-center gap-2 rtl:flex-row-reverse">
                                     <span className="w-1 h-1 bg-primary rounded-full"></span>
-                                    {place.category_name}
+                                    {place.category_name || place.category_name_en || place.category_name_ar || 'Attraction'}
                                 </span>
                                 <Link href={`/attractions/${place.slug}`}>
                                     <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">

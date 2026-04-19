@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { api } from '../utils/api';
+import { API_BASE_URL } from '../utils/urls';
 
 interface User {
     id: number;
@@ -96,7 +97,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const updateProfile = async (formData: FormData) => {
         try {
             const token = localStorage.getItem('access_token');
-            const res = await fetch('http://localhost:8000/api/accounts/me/', {
+            const res = await fetch(`${API_BASE_URL}/accounts/me/`, {
                 method: 'PATCH',
                 headers: {
                     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),

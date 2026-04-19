@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '@/utils/api';
+import type { Category, Place } from '@/types/api';
 
 type ApiCollection<T> = T[] | { results?: T[] } | null | undefined;
 
@@ -14,7 +15,7 @@ const normalizeCollection = <T,>(data: ApiCollection<T>): T[] => {
 };
 
 export const usePlaces = (params?: string) => {
-    const [places, setPlaces] = useState<unknown[]>([]);
+    const [places, setPlaces] = useState<Place[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -38,7 +39,7 @@ export const usePlaces = (params?: string) => {
 };
 
 export const useCategories = () => {
-    const [categories, setCategories] = useState<unknown[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -61,7 +62,7 @@ export const useCategories = () => {
 };
 
 export const usePlace = (slug: string) => {
-    const [place, setPlace] = useState<unknown>(null);
+    const [place, setPlace] = useState<Place | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 

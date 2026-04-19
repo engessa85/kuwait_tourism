@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000/api';
+import { API_BASE_URL } from './urls';
 
 export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
     const token = localStorage.getItem('access_token');

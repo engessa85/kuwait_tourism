@@ -1,22 +1,25 @@
-# Base image
-# FROM node:20-alpine
-
-FROM node:20
-
-# Set working directory
+FROM node:20 AS deps
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies including optional ones
 RUN npm install --include=optional
 
-# Copy application files
+FROM node:20 AS builder
+WORKDIR /app
+ARG NEXT_PUBLIC_API_BASE_URL=/api
+ARG NEXT_PUBLIC_MEDIA_BASE_URL=
+ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+ARG NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_MEDIA_BASE_URL=$NEXT_PUBLIC_MEDIA_BASE_URL
+ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+ENV NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=$NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN npm run build
 
-# Expose port for the application
+FROM node:20 AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app ./
 EXPOSE 3000
-
-# Start the application in development mode
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

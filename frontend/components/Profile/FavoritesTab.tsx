@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { api } from '@/utils/api';
 import { useLanguage } from '@/context/LanguageContext';
+import { API_BASE_URL, buildMediaUrl } from '@/utils/urls';
 
 export default function FavoritesTab() {
     const { language, t } = useLanguage();
@@ -43,7 +44,7 @@ export default function FavoritesTab() {
     // Helper for apiFetch DELETE since api object doesn't have it explicitly
     const apiFetch = async (endpoint: string, options: any) => {
         const token = localStorage.getItem('access_token');
-        return fetch(`http://localhost:8000/api${endpoint}`, {
+        return fetch(`${API_BASE_URL}${endpoint}`, {
             ...options,
             headers: {
                 ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
@@ -82,7 +83,7 @@ export default function FavoritesTab() {
                             <div className="aspect-4/5 relative">
                                 {place.image1 && (
                                     <Image 
-                                        src={`http://localhost:8000${place.image1}`} 
+                                        src={buildMediaUrl(place.image1)} 
                                         alt={language === 'en' ? place.title_en : place.title_ar} 
                                         fill 
                                         className="object-cover group-hover:scale-105 transition-transform duration-500" 

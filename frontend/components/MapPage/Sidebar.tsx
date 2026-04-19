@@ -10,7 +10,12 @@ interface CategoryOption {
 
 interface SidebarPlace {
     id: string;
-    [key: string]: unknown;
+    title: string;
+    category: string;
+    distance: string;
+    rating: number;
+    reviewsCount: string;
+    image: string;
 }
 
 interface SidebarProps {

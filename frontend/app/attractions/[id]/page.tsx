@@ -24,7 +24,9 @@ const DetailPageContent = () => {
     if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
     if (error || !place) return <div className="min-h-screen flex items-center justify-center text-red-500">Place not found</div>;
 
-    const images = [place.image1, place.image2, place.image3, place.image4].filter(Boolean);
+    const images = [place.image1, place.image2, place.image3, place.image4].filter(
+        (image): image is string => Boolean(image)
+    );
 
     return (
         <div className="min-h-screen bg-white">
@@ -49,9 +51,9 @@ const DetailPageContent = () => {
 
                     <div className="hidden lg:block">
                         <BookingSidebar 
-                            price={place.price} 
+                            price={place.price ?? undefined} 
                             placeId={place.id} 
-                            initialIsFavorite={place.is_favorite} 
+                            initialIsFavorite={place.is_favorite ?? false} 
                         />
                     </div>
                 </div>
@@ -59,8 +61,8 @@ const DetailPageContent = () => {
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <LocationSection
                         title={language === 'en' ? place.title_en : place.title_ar}
-                        lat={place.latitude}
-                        lng={place.longitude}
+                        lat={place.latitude ?? undefined}
+                        lng={place.longitude ?? undefined}
                     />
                 </div>
             </main>
