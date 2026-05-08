@@ -1,11 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import Modal from './Modal';
 
 const Footer = () => {
     const { t } = useLanguage();
+    const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+    const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+    const PolicyContent = ({ content }: { content: any }) => (
+        <div className="space-y-6">
+            <p className="text-gray-600 font-medium">{content.last_updated}</p>
+            <p className="text-gray-500 leading-relaxed">{content.introduction}</p>
+            {content.sections.map((section: any, index: number) => (
+                <div key={index} className="space-y-2">
+                    <h4 className="font-bold text-gray-900">{section.title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">{section.content}</p>
+                </div>
+            ))}
+        </div>
+    );
 
     return (
         <footer className="bg-white border-t border-gray-100 pt-20 pb-10">
@@ -51,7 +67,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Explore Column (matches Categories section) */}
+                    {/* Explore Column */}
                     <div className="text-left rtl:text-right">
                         <h4 className="font-bold text-gray-900 mb-6">{t.footer.explore}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
@@ -64,7 +80,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Featured Experiences Column (matches Experiences section) */}
+                    {/* Featured Experiences Column */}
                     <div className="text-left rtl:text-right">
                         <h4 className="font-bold text-gray-900 mb-6">{t.footer.featured}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
@@ -82,11 +98,38 @@ const Footer = () => {
                         © {new Date().getFullYear()} Kuwait Tourism. All rights reserved.
                     </p>
                     <div className="flex gap-8 text-xs text-gray-400 uppercase tracking-widest font-bold">
-                        <a href="#" className="hover:text-primary transition-colors">{t.footer.privacy}</a>
-                        <a href="#" className="hover:text-primary transition-colors">{t.footer.terms}</a>
+                        <button 
+                            onClick={() => setIsPrivacyOpen(true)}
+                            className="hover:text-primary transition-colors"
+                        >
+                            {t.footer.privacy}
+                        </button>
+                        <button 
+                            onClick={() => setIsTermsOpen(true)}
+                            className="hover:text-primary transition-colors"
+                        >
+                            {t.footer.terms}
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Modals */}
+            <Modal 
+                isOpen={isPrivacyOpen} 
+                onClose={() => setIsPrivacyOpen(false)} 
+                title={t.footer.privacy_content.title}
+            >
+                <PolicyContent content={t.footer.privacy_content} />
+            </Modal>
+
+            <Modal 
+                isOpen={isTermsOpen} 
+                onClose={() => setIsTermsOpen(false)} 
+                title={t.footer.terms_content.title}
+            >
+                <PolicyContent content={t.footer.terms_content} />
+            </Modal>
         </footer>
     );
 };
