@@ -2,13 +2,21 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useCategories, usePlaces } from '@/hooks/useApi';
 import Modal from './Modal';
 
 const Footer = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
     const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+    const { categories } = useCategories();
+    const { places } = usePlaces();
+
+    const displayCategories = (categories || []).slice(0, 5);
+    const displayPlaces = (places || []).slice(0, 5);
 
     const PolicyContent = ({ content }: { content: any }) => (
         <div className="space-y-6">
@@ -71,12 +79,16 @@ const Footer = () => {
                     <div className="text-left rtl:text-right">
                         <h4 className="font-bold text-gray-900 mb-6">{t.footer.explore}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.historical}</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.modern}</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.nature}</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.shopping}</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.dining}</a></li>
-                            <li><a href="#categories" className="hover:text-primary transition-colors">{t.categories.items.arts}</a></li>
+                            {displayCategories.map((category) => (
+                                <li key={category.id}>
+                                    <Link 
+                                        href={`/categories?filter=${category.slug}`} 
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        {language === 'en' ? category.name_en : category.name_ar}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -84,10 +96,16 @@ const Footer = () => {
                     <div className="text-left rtl:text-right">
                         <h4 className="font-bold text-gray-900 mb-6">{t.footer.featured}</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.grand_mosque.title}</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.failaka.title}</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.mirror_house.title}</a></li>
-                            <li><a href="#experiences" className="hover:text-primary transition-colors">{t.experiences.items.salmi_desert.title}</a></li>
+                            {displayPlaces.map((place) => (
+                                <li key={place.id}>
+                                    <Link 
+                                        href={`/attractions/${place.slug}`} 
+                                        className="hover:text-primary transition-colors"
+                                    >
+                                        {language === 'en' ? place.title_en : place.title_ar}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
