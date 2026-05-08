@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -9,9 +9,22 @@ import { usePlaces } from '@/hooks/useApi';
 const Experiences = () => {
     const { t, language } = useLanguage();
     const { places, loading, error } = usePlaces();
+    const [visibleCount, setVisibleCount] = useState(4);
 
     if (loading) return <div className="py-20 text-center text-gray-400">Loading experiences...</div>;
     if (error) return null;
+
+    const visiblePlaces = (places || []).slice(0, visibleCount);
+    const hasMore = (places || []).length > visibleCount;
+    const canShowLess = visibleCount > 4;
+
+    const handleViewMore = () => {
+        setVisibleCount(prev => prev + 4);
+    };
+
+    const handleShowLess = () => {
+        setVisibleCount(prev => Math.max(4, prev - 4));
+    };
 
     return (
         <section id="experiences" className="py-20 bg-gray-50/50 px-4 md:px-8">
@@ -26,8 +39,8 @@ const Experiences = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {places.map((place, idx) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    {visiblePlaces.map((place, idx) => (
                         <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group">
                             <div className="relative h-60 w-full">
                                 <Link href={`/attractions/${place.slug}`}>
@@ -62,9 +75,30 @@ const Experiences = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Pagination Buttons */}
+                <div className="flex justify-center gap-4">
+                    {hasMore && (
+                        <button 
+                            onClick={handleViewMore}
+                            className="bg-primary text-white font-bold py-3 px-8 rounded-xl text-sm transition-all hover:bg-primary/90 shadow-lg shadow-primary/20"
+                        >
+                            {t.experiences.view_more}
+                        </button>
+                    )}
+                    {canShowLess && (
+                        <button 
+                            onClick={handleShowLess}
+                            className="bg-white border border-gray-200 text-gray-600 font-bold py-3 px-8 rounded-xl text-sm transition-all hover:bg-gray-50"
+                        >
+                            {t.experiences.show_less}
+                        </button>
+                    )}
+                </div>
             </div>
         </section>
     );
 };
+
 
 export default Experiences;

@@ -43,6 +43,8 @@
         "title": "Featured Experiences",
         "description": "Immerse yourself in the unique activities that make Kuwait unforgettable, from the desert to the sea.",
         "more": "More",
+        "view_more": "View More",
+        "show_less": "Show Less",
         "items": {
             "grand_mosque": {
                 "title": "Grand Mosque Guided Tour",
