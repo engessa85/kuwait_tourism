@@ -45,7 +45,7 @@ export default function Sidebar({
     return (
         <div className="w-[380px] bg-white h-full border-r border-gray-100 flex flex-col shadow-sm z-10 shrink-0">
             {/* Header: Search and Categories */}
-            <div className="p-6 pb-2">
+            <div className="p-6 pb-2 shrink-0">
                 {/* Search Bar */}
                 <div className="relative mb-4">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -92,7 +92,7 @@ export default function Sidebar({
             </div>
 
             {/* List Header */}
-            <div className="px-6 py-2 pb-0">
+            <div className="px-6 py-2 pb-0 shrink-0">
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Popular Nearby</h3>
             </div>
 

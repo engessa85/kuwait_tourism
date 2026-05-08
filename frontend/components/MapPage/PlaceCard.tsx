@@ -24,7 +24,7 @@ export default function PlaceCard({
     return (
         <div
             onClick={onClick}
-            className={`cursor-pointer rounded-2xl border transition-all duration-200 overflow-hidden ${isActive
+            className={`cursor-pointer rounded-2xl border transition-all duration-200 overflow-hidden shrink-0 ${isActive
                 ? 'border-primary bg-primary/5 shadow-md ring-1 ring-primary/20'
                 : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm'
                 }`}
