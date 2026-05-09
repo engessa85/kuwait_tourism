@@ -62,10 +62,11 @@ type MapPlace = {
 };
 
 export default function MapPage() {
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
     const [activePlaceId, setActivePlaceId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState('all');
+    const [viewMode, setViewMode] = useState<'list' | 'map'>('map');
 
     const { categories, loading: catLoading } = useCategories();
     const { places, loading: placesLoading } = usePlaces();
@@ -122,24 +123,63 @@ export default function MapPage() {
     return (
         <div className="flex flex-col h-screen overflow-hidden">
             <Header showNav={false} />
-            <div className="flex flex-1 bg-gray-50 overflow-hidden">
-                <Sidebar
-                    places={filteredPlaces}
-                    activePlaceId={activePlaceId}
-                    onPlaceSelect={setActivePlaceId}
-                    searchQuery={searchQuery}
-                    onSearchChange={setSearchQuery}
-                    activeCategory={activeCategory}
-                    onCategoryChange={setActiveCategory}
-                    categories={dynamicCategories}
-                />
-                <div className="flex-1 relative">
+            <div className="flex flex-1 bg-gray-50 overflow-hidden relative">
+                {/* Sidebar Container */}
+                <div className={`
+                    ${viewMode === 'list' ? 'flex' : 'hidden'} 
+                    md:flex md:w-[380px] shrink-0 h-full border-r border-gray-100 z-10
+                `}>
+                    <Sidebar
+                        places={filteredPlaces}
+                        activePlaceId={activePlaceId}
+                        onPlaceSelect={(id) => {
+                            setActivePlaceId(id);
+                            if (window.innerWidth < 768) {
+                                setViewMode('map');
+                            }
+                        }}
+                        searchQuery={searchQuery}
+                        onSearchChange={setSearchQuery}
+                        activeCategory={activeCategory}
+                        onCategoryChange={setActiveCategory}
+                        categories={dynamicCategories}
+                    />
+                </div>
+
+                {/* Map Container */}
+                <div className={`
+                    flex-1 relative h-full
+                    ${viewMode === 'map' ? 'block' : 'hidden md:block'}
+                `}>
                     <InteractiveMap
                         places={filteredPlaces}
                         activePlaceId={activePlaceId}
                         onPlaceSelect={setActivePlaceId}
                     />
                 </div>
+
+                {/* Mobile View Toggle Button */}
+                <button 
+                    onClick={() => setViewMode(viewMode === 'map' ? 'list' : 'map')}
+                    className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-20 bg-gray-900 text-white px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-2 hover:bg-gray-800 transition-all active:scale-95"
+                >
+                    {viewMode === 'map' ? (
+                        <>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            {t.map.show_list}
+                        </>
+                    ) : (
+                        <>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            {t.map.show_map}
+                        </>
+                    )}
+                </button>
             </div>
         </div>
     );

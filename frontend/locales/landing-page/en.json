@@ -166,6 +166,8 @@
         "title": "Navigate the City's Landmarks",
         "description": "Plan your itinerary with our interactive map. Discover hidden gems, find the best routes, and explore districts like a local.",
         "cta": "Open Interactive Map",
+        "show_list": "Show List",
+        "show_map": "Show Map",
         "markers": {
             "kuwait_towers": "Kuwait Towers",
             "avenues": "The Avenues",

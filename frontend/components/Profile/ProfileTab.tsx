@@ -54,9 +54,9 @@ export default function ProfileTab() {
         <div className="max-w-2xl">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">{t.profile.sidebar.profile}</h2>
             
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm mb-8">
-                <div className="flex items-center gap-6 mb-8">
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-sm">
+            <div className="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-sm mb-8">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 text-center sm:text-left">
+                    <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-sm shrink-0">
                         {user?.profile_picture ? (
                             <Image 
                                 src={buildMediaUrl(user.profile_picture)} 
@@ -89,7 +89,7 @@ export default function ProfileTab() {
                         />
                     </div>
                     <div>
-                        <h3 className="font-bold text-gray-900">{user?.full_name}</h3>
+                        <h3 className="font-bold text-xl text-gray-900">{user?.full_name}</h3>
                         <p className="text-sm text-gray-500">{t.profile.sidebar.member_since.replace('{{year}}', new Date(user?.date_joined || '').getFullYear().toString())}</p>
                     </div>
                 </div>
@@ -125,14 +125,14 @@ export default function ProfileTab() {
                     <button 
                         type="submit" 
                         disabled={loading}
-                        className="bg-primary text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all disabled:opacity-50"
+                        className="w-full sm:w-auto bg-primary text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all disabled:opacity-50"
                     >
                         {loading ? 'Saving...' : 'Save Changes'}
                     </button>
                 </form>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
                     <p className="text-gray-500 text-sm font-medium mb-1">{t.profile.dashboard.stats.total_reviews}</p>
                     <p className="text-3xl font-black text-gray-900">{user?.reviews_count}</p>

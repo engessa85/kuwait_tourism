@@ -43,7 +43,7 @@ export default function Sidebar({
         ? categories
         : [{ id: 'all', label: 'All' }];
     return (
-        <div className="w-[380px] bg-white h-full border-r border-gray-100 flex flex-col shadow-sm z-10 shrink-0">
+        <div className="w-full bg-white h-full flex flex-col shadow-sm z-10 shrink-0">
             {/* Header: Search and Categories */}
             <div className="p-6 pb-2 shrink-0">
                 {/* Search Bar */}

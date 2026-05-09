@@ -22,9 +22,9 @@ interface PlaceInfoWindowProps {
 
 export default function PlaceInfoWindow({ place, onClose }: PlaceInfoWindowProps) {
     return (
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-[380px] font-sans border border-gray-100">
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-[calc(100vw-32px)] sm:w-[380px] max-w-[380px] font-sans border border-gray-100">
             {/* Image Header */}
-            <div className="relative h-[220px] w-full">
+            <div className="relative h-[180px] sm:h-[220px] w-full">
                 <Image
                     src={place.image}
                     alt={place.title}
