@@ -77,18 +77,17 @@ const BookingSidebar = ({ price, placeId, initialIsFavorite = false }: BookingSi
                     </div>
                 </div>
 
-                <button 
+                <button
                     onClick={toggleFavorite}
                     disabled={loading}
-                    className={`w-full py-4 rounded-[1.5rem] font-bold transition-all shadow-lg flex items-center justify-center gap-3 active:scale-[0.98] group ${
-                        isFavorite 
-                        ? 'bg-red-50 text-red-500 shadow-red-500/10 border border-red-100' 
-                        : 'bg-blue-600 text-white shadow-blue-600/20 hover:bg-blue-700'
-                    }`}
+                    className={`w-full py-4 rounded-[1.5rem] font-bold transition-all shadow-lg flex items-center justify-center gap-3 active:scale-[0.98] group ${isFavorite
+                            ? 'bg-red-50 text-red-500 shadow-red-500/10 border border-red-100'
+                            : 'bg-blue-600 text-white shadow-blue-600/20 hover:bg-blue-700'
+                        }`}
                 >
                     {isFavorite ? 'Removed from favourite' : 'Add to favourite'}
-                    <svg 
-                        className={`w-5 h-5 transition-transform group-hover:scale-110 ${isFavorite ? 'fill-current' : 'fill-none stroke-current stroke-2'}`} 
+                    <svg
+                        className={`w-5 h-5 transition-transform group-hover:scale-110 ${isFavorite ? 'fill-current' : 'fill-none stroke-current stroke-2'}`}
                         viewBox="0 0 24 24"
                     >
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -107,7 +106,7 @@ const BookingSidebar = ({ price, placeId, initialIsFavorite = false }: BookingSi
                     <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xs">
                         📞
                     </div>
-                    +965 123 45678
+                    22943399
                 </a>
             </div>
         </aside>
